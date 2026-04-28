@@ -1,0 +1,53 @@
+---
+title: "Badge component"
+sidebarTitle: "Badge component"
+description: "Create Badge tag"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Badge } from "@emailux/components";
+
+export default function EmailTemplate() {
+  return <>
+      <Badge varient='default'>
+        <span>Text</span>
+     </Badge>
+  </>
+}
+```
+
+## Props
+
+| Name     | Type            | Required | Default | Description |
+| -------- | --------------- | -------- | ------- | ----------- |
+| children | React.ReactNode | string | Yes      | —       | - |
+| dir    | "ltr" \| "rtl"       | No       | Comes from wrapping `Html` component's `dir` context prop which is `ltr`   | Text direction for the wrapper cell                |
+| spacing | string               | No       | Comes from wrapping `Html` component's `defaultSpacing` context prop which is `20px`       | Spacing bottom, by default comes from `Html` defaultSpacing prop |
+| varient | string | No | `default` | — |
+| padding | string | No | `6px 8px` | inside padding |
+| noPadding | boolean | No | false | — |

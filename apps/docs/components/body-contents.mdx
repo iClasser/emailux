@@ -1,0 +1,70 @@
+---
+title: "BodyContent component"
+sidebarTitle: "BodyContent component"
+description: "Create BodyContent wrapper tag"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { BodyContent } from "@emailux/components";
+
+export default function EmailTemplate() {
+  return <>
+      <BodyContent>
+          <title>Header</title>
+      </BodyContent>
+
+      <BodyContent>
+          <title>Body</title>
+      </BodyContent>
+
+      <BodyContent>
+          <title>Footer</title>
+      </BodyContent>
+  </>
+}
+```
+
+## Props
+
+| Name     | Type            | Required | Default | Description |
+| -------- | --------------- | -------- | ------- | ----------- |
+| children | React.ReactNode | Yes      | —       | Content of the email document |
+| dir    | "ltr" \| "rtl"       | No       | Comes from wrapping `Html` component's `dir` context prop which is `ltr`   | Text direction                |
+| background | string | Yes | — | — |
+| backgroundColor | string | Yes | — | — |
+| style | React.CSSProperties | No | - | - |
+| width | number or "100%" | No | — | width of container |
+| padding | string | No | `12px 20px` | inner padding |
+| outerBgColor | string | No | — | When whidth is not `100%` and a number, you can set this value as Hex color value to set the left and right side of the section background color, not the inside |
+| borderRadius | string | No |  |  |
+| className | string | no | — | — |
+| backgroundPosition | string | no | "bottom" |  when there is background image url this is css property for position |
+| backgroundRepeat | string | no | "no-repeat, no-repeat" | when there is background image url this is css property for repeat |
+| bgImageTakesAllWrappers | string | no | false | when there is background image url takes all if width is not 100%, but with 100% it already takes all  |
+| borderWidth | number | No | — | border width |
+| borderColor | string | No | — | Border will work if border width is greater than 0 |

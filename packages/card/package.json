@@ -1,0 +1,66 @@
+{
+  "name": "@emailux/card",
+  "version": "1.0.0",
+  "description": "A React email card component to wrap emails (EmailUX Mailer)",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm,cjs --dts --external react",
+    "build:watch": "tsdown src/index.ts --format esm,cjs --dts --external react --watch",
+    "clean": "rm -rf dist && rm -rf node_modules && rm -rf .turbo",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepack": "pnpm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iClasser/emailux",
+    "directory": "packages/card"
+  },
+  "keywords": [
+    "react",
+    "email",
+    "email-notification",
+    "react-email-component",
+    "react-email",
+    "send-email",
+    "email-component",
+    "emailux-mailer",
+    "emailux-email-comps",
+    "emailux"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0 || ^19.0 || ^19.0.0-rc"
+  },
+  "dependencies": {
+    "@emailux/html": "workspace:*"
+  },
+  "devDependencies": {
+    "tsconfig": "workspace:^0.1.0",
+    "typescript": "5.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

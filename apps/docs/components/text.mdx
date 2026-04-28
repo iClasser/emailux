@@ -1,0 +1,63 @@
+---
+title: "Text component"
+sidebarTitle: "Text component"
+description: "Create Text component"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Text } from "@emailux/components";
+
+export default function EmailTemplate() {
+  return <Text spacing='10px' fontWeight='400' fontFamily='Arial' fontSize='20px'>
+  Hello world!
+  </Text>;
+}
+```
+
+## Props
+
+| Name     | Type            | Required | Default | Description |
+| -------- | --------------- | -------- | ------- | ----------- |
+| children | React.ReactNode | Yes      | —       | Content of the email document |
+| color | string | No      | —       | `#000` |
+| fontSize | string | No      | —       |  |
+| fontWeight | string | No      | —       |  |
+| lineHeight | string | No      | —       |  |
+| fontFamily | string | No      | —       |  |
+| className | string | No      | —       |  |
+| dir    | "ltr" \| "rtl"       | No       | Comes from wrapping `Html` component's `dir` context prop which is `ltr`   | Text direction for the wrapper cell                |
+| spacing | string               | No       | Comes from wrapping `Html` component's `defaultSpacing` context prop which is `20px`       | Spacing bottom, by default comes from `Html` defaultSpacing prop |
+| style | React.CSSProperties               | No       | —       |  |
+| plain | boolean | No      | false | Used when you don't want to use table or margin bottom just a paragraph without spacing |
+| letterSpacing | string | No      | —       |  |
+| inline | boolean | No      | false | Used when you want to write something in one line inside another component without spacing |
+| href | string | No | - | If you want to convert the text to link |
+| padding | CSS padding style string | No | "" | Only works if its either inline or plain and you can add a css string |
+
+All other standard attributes for the `<text>` element are supported.
+

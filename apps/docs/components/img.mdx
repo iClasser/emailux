@@ -1,0 +1,73 @@
+---
+title: "Img component"
+sidebarTitle: "Img component"
+description: "Create Img component"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Img } from "@emailux/components";
+
+export default function Email() {
+  return <Img src="cat.jpg" alt="Cat" width={300} height={300} />;
+}
+```
+
+## Alignment & styling
+
+```tsx
+<Img
+  src="banner.png"
+  alt="Banner"
+  width={600}
+  center
+  direction="ltr"
+  borderRadius="8px"
+  spacing="20px"
+/>
+```
+
+## Props
+
+| Name         | Type                 | Required | Default | Description                                        |
+| ------------ | -------------------- | -------- | ------- | -------------------------------------------------- |
+| src          | string               | Yes      | ""      | Path or URL to the image                           |
+| alt          | string               | No       | "image"      | Alternate description for the image                |
+| width        | number \| string     | No       | —       | Image width. Numbers are treated as px in style    |
+| height       | number \| string     | No       | —       | Image height. Numbers are treated as px in style   |
+| center       | boolean              | No       | false   | Centers the image within the table cell            |
+| borderRadius | string               | No       | —       | Applied as CSS border-radius on the image          |
+| dir    | "ltr" \| "rtl"       | No       | Comes from wrapping `Html` component's `dir` context prop which is `ltr`   | Text direction                |
+| spacing | string               | No       | Comes from wrapping `Html` component's `defaultSpacing` context prop which is `20px`       | Spacing bottom, by default comes from `Html` defaultSpacing prop |
+| padding | string               | No       | —       | Custom padding for container cell; overrides default bottom spacing. In plain mode, applied to the image style. |
+| style | React.CSSProperties               | No       | —       |  |
+| plain       | boolean              | No       | false   | Returns plain image without container and spacing            |
+| href | string | No | - | If you want to convert the image to be clickable |
+| maxHeight       | number \| string     | No       | —       |   |
+| maxWidth       | number \| string     | No       | —       |   |
+
+

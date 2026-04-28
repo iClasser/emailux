@@ -1,0 +1,60 @@
+---
+title: "Font component"
+sidebarTitle: "Font component"
+description: "Create Font component"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Font } from "@emailux/components";
+
+export default function EmailTemplate() {
+  return <Font 
+            family='Inter'
+            url='https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZJhiJ-Ek-_EeAmM.woff2'
+            type='woff2'
+            fallback='Arial'
+            style='normal'
+            weight='400'
+            targetSelectors={['body', '.inkdes-table']}
+          />
+}
+```
+
+## Props
+
+| Name     | Type                   | Required | Default | Description                         |
+| -------- | ---------------------- | -------- | ------- | ----------------------------------- |
+| children | React.ReactNode        | Yes      | —       | Content of the email document       |
+| family | String        | Yes      | —       | -       |
+| url | String        | Yes      | —       | -       |
+| type | String        | Yes      | —       | "woff2" or "woff"       |
+| style | String        | Yes      | —       | -       |
+| weigth | String        | Yes      | —       | 400       |
+| targetSelectors | Array of css selector strings        | No      | —       |        |
+
+All other standard Head attributes for the `<head>` element are supported.

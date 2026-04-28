@@ -1,4 +1,4 @@
-# Email UX
+# @emailux/components
 EmailUX react email components library. You can create emails with these components well tested for email compatibility.
 <br />
 <br />

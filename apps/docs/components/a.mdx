@@ -1,0 +1,52 @@
+---
+title: "A component"
+sidebarTitle: "A component"
+description: "Create A component"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { A } from "@emailux/a";
+
+export default function EmailTemplate() {
+  return <>
+      <A href='#' color='blue'>Docs</A>
+  </>
+}
+```
+
+## Props
+
+| Name     | Type            | Required | Default | Description |
+| -------- | --------------- | -------- | ------- | ----------- |
+| children | any | No |  |  |
+| dir      | "ltr" \| "rtl"          | No       | "ltr"   | Text direction for the content     |
+| color | string | No |  | Hex color |
+| noDecoration | boolean | No | false |  |
+| style | React.CSSProperties | No | |  |
+| rel | string | No |'noopener noreferrer' |  |
+| spacing | string               | No       | - | Spacing bottom, and the anchor tag will be a block component if set |

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "React Email",
+  "colors": {
+    "primary": "#00AAAB",
+    "light": "#E5F3F4",
+    "dark": "#12474C"
+  },
+  "contextual": {
+    "options": ["copy", "chatgpt", "claude"]
+  },
+  "favicon": "/logo/favicon.png",
+  "navigation": {
+    "anchors": [
+      {
+        "anchor": "Documentation",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": ["introduction"]
+          },
+          {
+            "group": "Getting Started",
+            "pages": ["getting-started/setup"]
+          },
+          {
+            "group": "Add-Ins",
+            "pages": ["addins/outlook-html-import", "addins/gmail-html-inserter"]
+          },
+          {
+            "group": "Components",
+            "pages": [
+              "components/html",
+              "components/head",
+              "components/font",
+              "components/css",
+              "components/body",
+              "components/button",
+              "components/text",
+              "components/a",
+              "components/badge",
+              "components/body-contents",
+              "components/card",
+              "components/hr",
+              "components/img",
+              "components/table",
+              "components/box",
+              "components/ul"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Components",
+          "href": "https://docs.emailux.com/getting-started/setup",
+          "icon": "grid-2-plus"
+        },
+        {
+          "anchor": "GitHub",
+          "href": "https://github.com/iClasser/emailux",
+          "icon": "github"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "appearance": {
+    "default": "dark",
+    "strict": true
+  },
+  "background": {
+    "image": "/images/background.png",
+    "color": {
+      "dark": "#111111"
+    }
+  },
+  "navbar": {
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/iClasser/emailux"
+    }
+  }
+}

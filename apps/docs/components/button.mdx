@@ -1,0 +1,62 @@
+---
+title: "Button component"
+sidebarTitle: "Button component"
+description: "Create Button component"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Button } from "@emailux/components";
+
+<Button
+ text='Submit'
+ href='https://example.com'
+ backgroundColor='#000'
+ textColor='#ffff'
+ borderRadius='20px'
+ style={{
+  paddingBottom: '20px'
+ }}
+/>
+```
+
+## Props
+
+| Name         | Type                 | Required | Default | Description                                        |
+| ------------ | -------------------- | -------- | ------- | -------------------------------------------------- |
+| src          | string               | Yes      | ""      | Path or URL to the image                           |
+| dir    | "ltr" \| "rtl"       | No       | Comes from wrapping `Html` component's `dir` context prop which is `ltr`   | Text direction                |
+| spacing | string               | No       | Comes from wrapping `Html` component's `defaultSpacing` context prop which is `20px`       | Spacing bottom, by default comes from `Html` defaultSpacing prop |
+| href          | string               | Yes       | ""      |                |
+| icon          | object               | No       |       |   `{ url, alt, width, height }`             |
+| backgroundColor          | string               | Yes       | ""      |                |
+| align          | string               | No       | "center"      |                |
+| direction          | string               | No       | "ltr"      |                |
+| textColor          | string               | No       |       |   css color hex             |
+| borderRadius          | string               | No       |       |              |
+| style          | string               | No       |       |  CSS style            |
+| borderWidth          | string               | No       |       |  CSS border width            |
+| borderColor          | string               | No       |       |  CSS border color            |

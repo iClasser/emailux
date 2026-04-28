@@ -1,0 +1,11 @@
+{
+	"name": "web",
+	"private": true,
+	"version": "0.1.0",
+	"scripts": {
+		"upgrade:comp": "node scripts/upgrade-comp.js"
+	},
+	"devDependencies": {
+		"inquirer": "8.2.6"
+	}
+}

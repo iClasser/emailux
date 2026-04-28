@@ -1,0 +1,92 @@
+---
+title: "EmailUX Setup"
+sidebarTitle: "EmailUX Setup"
+description: "Create a brand-new with EmailUX."
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "flower"
+---
+
+## 1. Create directory
+
+Create a new folder called `inkdes-email-starter` and initialize a new npm project:
+
+```sh
+mkdir inkdes-email-starter
+cd inkdes-email-starter
+npm init
+```
+
+## 2. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```sh npm
+npm install @emailux/components
+```
+
+```sh yarn
+yarn add @emailux/components
+```
+
+```sh pnpm
+pnpm add @emailux/components
+```
+
+```sh bun
+bun add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 3. Write an email template
+
+Create a new folder called `emails`, create a file inside called `my-email.tsx`, and add the following code:
+
+```jsx emails/email-template.tsx
+import { Button, Html, Body, Head } from "@emailux/components";
+import * as React from "react";
+
+export default function EmailTemplate({ name }) {
+  return (
+    <Html>
+      <Head></Head>
+      <Body previewText='here are some details.'>
+        <Text>Hello, {name}</Text>
+        <Button href="https://example.com">Click here</Button>
+      </Body>
+    </Html>
+  );
+}
+```
+
+## 4. Use the template to convert and send email
+
+```jsx parser.tsx
+import EmailTemplate from 'emails/email-template';
+import { getHtml } from "@emailux/components";
+
+export default function hanlder(req, resp){
+  try{
+    // convert template to Html
+
+    const name = 'John';
+    const { html, error } = getHtml(<EmailTemplate name={name} />);
+    if(!error){
+      // handle error
+    }
+
+    // handle html
+    // send email `sendEmail(html)` using your provider like sendGrid or EmailUX
+    // ....
+    
+
+  } catch (error){
+
+  }
+}
+```
+
+

@@ -1,0 +1,72 @@
+---
+title: "Card component"
+sidebarTitle: "Card component"
+description: "Create Card component"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Text } from "@emailux/components";
+import { Card } from "@emailux/card";
+
+export default function EmailTemplate() {
+  return <>
+      <Card 
+        header={<Text>Some header</Text>}
+        content={<Text>Some content</Text>}
+        footer={<Text>Some footer</Text>}
+        headerBackgroundColor='#fff'
+        contentBackgroundColor='#fff'
+        footerBackgroundColor='#fff'
+        borderRadius='24px' 
+        padding='12px 15px'
+        width='100%'
+        spacing='20px' 
+     />
+  </>
+}
+```
+
+## Props
+
+| Name     | Type            | Required | Default | Description |
+| -------- | --------------- | -------- | ------- | ----------- |
+| header | React.ReactNode | No      | —       |  |
+| dir    | "ltr" \| "rtl"       | No       | Comes from wrapping `Html` component's `dir` context prop which is `ltr`   | Text direction                |
+| spacing | string               | No       | Comes from wrapping `Html` component's `defaultSpacing` context prop which is `20px`       | Spacing bottom, by default comes from `Html` defaultSpacing prop |
+| content | React.ReactNode | No      | —       |  |
+| footer | React.ReactNode | No      | —       |  |
+| headerBackgroundColor | string | No | #fff | — |
+| contentBackgroundColor | string | No | #fff | — |
+| footerBackgroundColor | string | No | #fff | — |
+| borderRadius | string | No | `24px` | — |
+| padding | string | No | `` | inner padding |
+| width | string | No | `100%` |  |
+| headerCenter | boolean | No | undefined |  |
+| contentCenter | boolean | No | undefined |  |
+| footerCenter | boolean | No | undefined |  |
+

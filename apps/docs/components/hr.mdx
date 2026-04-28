@@ -1,0 +1,52 @@
+---
+title: "Hr component"
+sidebarTitle: "Hr component"
+description: "Create Hr component"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Hr } from "@emailux/components";
+
+export default function EmailTemplate() {
+  return <>
+      <Hr />
+  </>
+}
+```
+
+## Props
+
+| Name     | Type            | Required | Default | Description |
+| -------- | --------------- | -------- | ------- | ----------- |
+| color | string | No | `#e5e5e5` |  |
+| dir    | "ltr" \| "rtl"       | No       | Comes from wrapping `Html` component's `dir` context prop which is `ltr`   | Text direction                |
+| spacing | string               | No       | Comes from wrapping `Html` component's `defaultSpacing` context prop which is `20px`       | Spacing bottom, by default comes from `Html` defaultSpacing prop |
+| width | string | No | `100%` | width of seperator |
+| align | string | No | `center` | If width is less than 100% then alignment becomes important |
+| style | React.CSSProperties | No |  |  |
+| height | number | No | `1` |  |

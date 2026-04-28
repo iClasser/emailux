@@ -1,0 +1,57 @@
+---
+title: "Css component"
+sidebarTitle: "Css component"
+description: "Create Css component"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Html, Head } from "@emailux/components";
+import { Css } from "@emailux/css";
+// Can also be imported from "@emailux/components"
+// import { Css } from "@emailux/components";
+
+export default function EmailTemplate() {
+  return <Html>
+  <Head>
+    <Css 
+      selector={['body', '.inkdes-table']} 
+      style={{ fontSize: '12px', lineHeight: '24px', color: '#000' }}
+      />
+  <Head>
+</Html>
+```
+
+## Props
+
+| Name     | Type                   | Required | Default | Description                         |
+| -------- | ---------------------- | -------- | ------- | ----------------------------------- |
+| children | React.ReactNode        | Yes      | —       | Content of the email document       |
+| style | React.CSSProperties        | Yes      | —       | -       |
+| selector | Array of strings of css selectors        | No      | —       |        |
+
+All other standard Head attributes for the `<css>` element are supported.

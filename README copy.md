@@ -1,4 +1,4 @@
-# Email UX
+# @emailux/components
 EmailUX react email components library. You can create emails with these components well tested for email compatibility.
 <br />
 <br />
@@ -65,7 +65,7 @@ export default function EmailTemplate() {
       fallback="Arial"
       style="normal"
       weight="400"
-      targetSelectors={['html', 'body', '.inkdes-table']}
+      targetSelectors={['html', 'body', '.emailux-table']}
     />
     <title>Platform name</title>
   </Head>

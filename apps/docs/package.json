@@ -1,0 +1,13 @@
+{
+  "name": "docs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "mintlify dev"
+  },
+  "dependencies": {
+    "mintlify": "4.2.536",
+    "zod": "^3.25.28",
+    "@emailux/components": "latest"
+  }
+}

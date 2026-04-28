@@ -1,0 +1,71 @@
+---
+title: "Box component"
+sidebarTitle: "Box component"
+description: "Create Box wrapper tag"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Box } from "@emailux/components";
+
+export default function EmailTemplate() {
+  return <>
+      <Box 
+        width='120px' 
+        padding='10px 16px'
+        center 
+        borderRadius='10px'
+        backgroundColor='#fff' 
+        spacing='20px'
+        backgroundImageUrl='https://example.com/image.png'
+        >
+          <Text>
+      </Box>
+  </>
+}
+```
+
+## Props
+
+| Name     | Type            | Required | Default | Description |
+| -------- | --------------- | -------- | ------- | ----------- |
+| children | React.ReactNode | Yes      | —       | Content of the email document |
+| dir    | "ltr" \| "rtl"       | No       | Comes from wrapping `Html` component's `dir` context prop which is `ltr`   | Text direction                |
+| backgroundColor | string | Yes | — | — |
+| style | React.CSSProperties | No | - | - |
+| width | number or "100%" | No | — | width of container |
+| padding | string | No | `10px 16px` | inner padding |
+| className | string | no | — | — |
+| borderRadius | string | No |  |  |
+| backgroundImageUrl | string | no | | Box background image |
+| backgroundPosition | string | no | "bottom" |  when there is background image url this is css property for position |
+| backgroundRepeat | string | no | "no-repeat, no-repeat" | when there is background image url this is css property for repeat |
+| itemCenter | boolean | no | true | Inner items will be aligned center |
+| center | boolean | no |  true | The box will be positioned center of email |
+| borderWidth | number | No | — | border width |
+| borderColor | string | No | — | Border will work if border width is greater than 0 |
+

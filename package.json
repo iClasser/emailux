@@ -1,0 +1,57 @@
+{
+  "name": "emailux-email-comps-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Turborepo for EmailUX-mailer components and apps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iClasser/emailux"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@10.13.1",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "dev:watch": "turbo run dev --filter './packages/*' --parallel",
+    "gen:ink": "pnpm dlx tsx tools/generate-ink-aggregator.ts",
+    "bump": "node tools/bump-workspace-version.js",
+    "bump:patch": "node tools/bump-patch.js",
+    "build:emailux": "pnpm -C rootPackage/emailux-email-comps build",
+    "clean": "pnpm run clean:packages",
+    "clean:packages": "pnpm -r --filter './packages/*' --filter './rootPackage/*' run clean",
+    "test": "turbo run test",
+    "changeset": "changeset",
+    "changeset:build": "pnpm turbo run build --filter './packages/*' --filter './rootPackage/*'",
+    "changeset:publish": "pnpm changeset publish",
+    "build:packages:publish": "pnpm turbo run build --filter './packages/*' --filter './rootPackage/*' && pnpm changeset publish",
+    "lint": "echo 'no lint configured'",
+    "version": "changeset version && pnpm install --no-frozen-lockfile",
+    "release": "turbo run build --filter=./packages/* --filter './rootPackage/*' && pnpm changeset publish",
+    "clean:install": "pnpm clean && pnpm install && pnpm build && pnpm changeset",
+    "playground": "pnpm -C apps/playground dev",
+    "examples": "pnpm -C apps/examples dev",
+    "examples:build": "pnpm -C apps/examples build",
+    "upgrade:comp": "pnpm -C apps/web run upgrade:comp",
+    "examples:start": "pnpm -C apps/examples start"
+  },
+  "keywords": [
+    "react",
+    "email",
+    "email-notification",
+    "react-email-component",
+    "react-email",
+    "send-email",
+    "email-component",
+    "emailux-mailer",
+    "emailux-email-comps",
+    "emailux"
+  ],
+  "devDependencies": {
+    "@changesets/cli": "2.29.5",
+    "inquirer": "8.2.6",
+    "tsdown": "^0.21.10",
+    "turbo": "2.5.4",
+    "typescript": "5.8.3",
+    "vitest": "3.2.4"
+  }
+}

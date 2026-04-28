@@ -1,0 +1,58 @@
+---
+title: "Ul component"
+sidebarTitle: "Ul component"
+description: "Create Ul wrapper tag"
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "hummer"
+---
+
+
+## 1. Install dependencies
+
+Install the EmailUX Email package locally and a few components.
+
+<CodeGroup>
+
+```bash
+# pnpm
+pnpm add @emailux/components
+
+# npm
+npm install @emailux/components
+
+# yarn
+yarn add @emailux/components
+```
+
+</CodeGroup>
+
+
+## 2. Usage
+
+```tsx
+import { Ul } from "@emailux/components";
+
+export default function EmailTemplate() {
+  return <>
+      <Ul spacing='20px' fontSize='14px' >
+          ....
+      </Ul>
+  </>
+}
+```
+
+## Props
+
+| Name     | Type            | Required | Default | Description |
+| -------- | --------------- | -------- | ------- | ----------- |
+| children | React.ReactNode | Yes      | —       | Content of the email document |
+| dir    | "ltr" \| "rtl"       | No       | Comes from wrapping `Html` component's `dir` context prop which is `ltr`   | Text direction for the wrapper cell                |
+| spacing | string               | No       | Comes from wrapping `Html` component's `defaultSpacing` context prop which is `20px`       | Spacing bottom, by default comes from `Html` defaultSpacing prop |
+| color | string | No      | —       | `#000` |
+| fontSize | string | No      | —       |  |
+| lineHeight | string | No      | —       |  |
+| fontWeight | string | No      | —       |  |
+| className | string | No      | —       |  |
+| plain | boolean | No      | false | Used when you don't want to use table or margin bottom just a paragraph without spacing |
+| letterSpacing | string | No      | —       |  |
+| paddingLeft | string | No      | `20px`       |  |
