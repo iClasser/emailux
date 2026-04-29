@@ -18,7 +18,7 @@ export function Header({ onOpenSidebar }: { onOpenSidebar?: () => void }) {
           <div className="flex items-center gap-2">
             <div className="rounded-lg flex items-center justify-center">
               {/* svg public */}
-              <Image src='/light.svg' alt='EmailUX Logo' width={200} height={40} />
+              <Image src='/light.svg' alt='EmailUX Logo' width={200} height={40} /><span className='ml-2'>/demo</span>
             </div>
             <span className="font-semibold text-lg sr-only">EmailUX Examples</span>
           </div>
