@@ -19,8 +19,8 @@ export interface UlProps extends React.ComponentPropsWithoutRef<"table"> {
 }
 
 export enum UlClassNamesEnum {
-  wrapper = 'inkdes-ul-wrapper',
-  ul = 'inkdes-ul',
+  wrapper = 'emailux-ul-wrapper',
+  ul = 'emailux-ul',
 }
 
 export const Ul: React.FC<UlProps> = ({

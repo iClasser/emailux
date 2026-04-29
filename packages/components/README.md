@@ -65,7 +65,7 @@ export default function EmailTemplate() {
       fallback="Arial"
       style="normal"
       weight="400"
-      targetSelectors={['html', 'body', '.inkdes-table']}
+      targetSelectors={['html', 'body', '.emailux-table']}
     />
     <title>Platform name</title>
   </Head>

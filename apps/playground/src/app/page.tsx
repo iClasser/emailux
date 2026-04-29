@@ -46,10 +46,10 @@ const EmailTemplate = () => {
       backgroundColor="#f2f6f7"
     >
       <Img
-        src="https://github.com/user-attachments/assets/8e885609-d2bb-46ab-a760-ae896757ff60"
-        alt="Cat"
-        width={48}
-        height={48}
+        src="https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/email_ux_black.png"
+        alt="EmailUX Logo"
+        width={170}
+        height={30}
       />
       <Text fontSize="14px" fontWeight="400" fontFamily="Inter, Arial, sans-serif" textColor="#000" style={{}} center={false}>
         Hello from EmailUX!

@@ -60,7 +60,7 @@ export default function EmailTemplate() {
   return <Html>
   <Head>
     <Css 
-      selector={['body', '.inkdes-table']} 
+      selector={['body', '.emailux-table']} 
       style={{ fontSize: '12px', lineHeight: '24px', color: '#000' }}
       />
   <Head>

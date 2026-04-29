@@ -24,8 +24,8 @@ export interface ButtonProps {
 }
 
 export enum ButtonClassNamesEnum {
-  text = 'inkdes-button-text',
-  anchor = 'inkdes-button-anchor',
+  text = 'emailux-button-text',
+  anchor = 'emailux-button-anchor',
 }
 
 export const Button = ({

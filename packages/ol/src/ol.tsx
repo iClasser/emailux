@@ -19,8 +19,8 @@ export interface OlProps extends React.ComponentPropsWithoutRef<"table"> {
 }
 
 export enum OlClassNamesEnum {
-  wrapper = 'inkdes-ol-wrapper',
-  ol = 'inkdes-ol',
+  wrapper = 'emailux-ol-wrapper',
+  ol = 'emailux-ol',
 }
 
 export const Ol: React.FC<OlProps> = ({
