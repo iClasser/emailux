@@ -1,6 +1,6 @@
 {
   "name": "@emailux/api-client",
-  "version": "0.0.1-alpha.4",
+  "version": "1.0.0",
   "description": "EmailUX API (EmailUX Render and Delivery)",
   "sideEffects": false,
   "main": "./dist/index.js",

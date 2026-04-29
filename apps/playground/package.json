@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emailux/api-client": "workspace:^*",
     "@emailux/components": "workspace:^*",
     "@emailux/get-html": "workspace:^*",
     "@emailux/get-text": "workspace:^*",

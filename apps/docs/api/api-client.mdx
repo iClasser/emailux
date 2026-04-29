@@ -1,0 +1,220 @@
+---
+title: "API client (@emailux/api-client)"
+sidebarTitle: "API client"
+description: "TypeScript client for EmailUX render and deliver APIs."
+"og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
+icon: "cube"
+---
+
+The [`@emailux/api-client`](https://www.npmjs.com/package/@emailux/api-client) package calls the EmailUX HTTP API: **`render`** (HTML by template) and **`deliver`** (render + send via a provider).
+
+## Installation
+
+<CodeGroup>
+
+```sh npm
+npm install @emailux/api-client
+```
+
+```sh yarn
+yarn add @emailux/api-client
+```
+
+```sh pnpm
+pnpm add @emailux/api-client
+```
+
+```sh bun
+bun add @emailux/api-client
+```
+
+</CodeGroup>
+
+## Default base URL
+
+All requests use:
+
+`https://render.emailux.com`
+
+Override with `baseUrl` in the client options if you use a custom deployment.
+
+**OpenAPI (Swagger):** The live spec for your deployment is at **`{baseUrl}/swagger.json`** (for example [`https://render.emailux.com/swagger.json`](https://render.emailux.com/swagger.json)). Use it for the latest paths, headers, bodies, and response codes.
+
+## Client options
+
+| Option | Description |
+|--------|-------------|
+| `apiKey` | Required. Sent as `x-api-key`. |
+| `baseUrl` | Optional. Defaults to `https://render.emailux.com` (trailing slash is stripped). |
+| `defaultLocale` | Optional. Default `en-US`; used when `locale` is omitted on `deliver` / `render`. |
+| `fetchImplementation` | Optional. Custom `fetch` (e.g. for tests or edge runtimes). |
+| `timeoutMs` | Optional. Request timeout via `AbortSignal`. |
+| `provider` | One of `sendgrid`, `gmail`, or `smtp`. Affects **deliver** defaults (see below). |
+| `sendgridDomain` | Required when using SendGrid (default provider). Your SendGrid-authenticated domain identifier. |
+
+**Render** in this package is only supported with a **SendGrid domain** configured (`sendgridDomain` is required for `render()`). Delivery can use **SendGrid**, **Gmail**, or **SMTP** via `provider` and optional per-call overrides.
+
+**HTTP mapping:** The client sends your domain as the `x-sendgrid-domain` header on render/deliver. The public API may also document this as `x-domain`; behavior depends on your EmailUX API version.
+
+## `render()` — HTML only
+
+Calls `POST /v1/render` with a JSON body:
+
+- `experience_id` (required)
+- `version` (optional)
+- `locale` (optional; falls back to `defaultLocale`)
+- `data` (object; defaults to `{}`)
+
+### Response codes (`/v1/render`)
+
+| Status | Meaning |
+|--------|---------|
+| `200` | Success. JSON includes `ok`, `html`, `subject`. |
+| `400` | Validation error |
+| `401` | Unauthorized |
+| `404` | Not found |
+
+On success, the client returns `{ ok: true, status, html?, subject? }`. On failure, `{ ok: false, status, error }` with `error.message` and optional `error.body`.
+
+### Example (SendGrid domain — required for render)
+
+```ts
+import { EmailUxApiClient } from '@emailux/api-client';
+
+const client = new EmailUxApiClient({
+  apiKey: process.env.EMAILUX_API_KEY!,
+  sendgridDomain: 'mail.yourdomain.com', // your EmailUX / SendGrid domain
+});
+
+const result = await client.render({
+  experienceId: 'welcome-email',
+  version: 1,
+  locale: 'en-US',
+  data: { firstName: 'Ada' },
+});
+
+if (result.ok) {
+  console.log(result.subject, result.html?.slice(0, 200));
+} else {
+  console.error(result.status, result.error);
+}
+```
+
+## `deliver()` — render and queue send
+
+Calls `POST /v1/deliver` with a JSON body:
+
+- `experience_id` (required)
+- `tenant` — not set by this client; use API keys and headers if your backend requires it when `x-domain` is omitted (see `swagger.json` for your deployment).
+- `version`, `locale` (optional)
+- `channel_data` (required): `toEmail`, `fromEmail`, optional `toEmailName`, `fromEmailName`
+- `data` (object; defaults to `{}`)
+
+Optional headers the client may send:
+
+- `x-provider`: `gmail` or `smtp` when using those providers (SendGrid uses the domain header path, so `x-provider` is omitted for SendGrid).
+
+### Response codes (`/v1/deliver`)
+
+| Status | Meaning |
+|--------|---------|
+| `200` | Success. JSON includes `ok`, `message`. |
+| `400` | Validation error |
+| `401` | Unauthorized |
+| `404` | Not found |
+| `502` | Provider error |
+
+### SendGrid
+
+Default provider is SendGrid; `sendgridDomain` is required on the client.
+
+```ts
+import { EmailUxApiClient } from '@emailux/api-client';
+
+const client = new EmailUxApiClient({
+  apiKey: process.env.EMAILUX_API_KEY!,
+  provider: 'sendgrid',
+  sendgridDomain: 'mail.yourdomain.com',
+});
+
+const result = await client.deliver({
+  experienceId: 'order-confirmation',
+  channelData: {
+    toEmail: 'customer@example.com',
+    toEmailName: 'Customer',
+    fromEmail: 'orders@yourdomain.com',
+    fromEmailName: 'Your Store',
+  },
+  data: { orderId: '12345' },
+});
+
+if (result.ok) {
+  console.log(result.message);
+} else {
+  console.error(result.status, result.error);
+}
+```
+
+You can omit `provider: 'sendgrid'`; the client still requires `sendgridDomain` for that configuration.
+
+### Gmail
+
+```ts
+import { EmailUxApiClient } from '@emailux/api-client';
+
+const client = new EmailUxApiClient({
+  apiKey: process.env.EMAILUX_API_KEY!,
+  provider: 'gmail',
+});
+
+const result = await client.deliver({
+  experienceId: 'order-confirmation',
+  channelData: {
+    toEmail: 'customer@example.com',
+    fromEmail: 'noreply@yourdomain.com',
+  },
+  data: { orderId: '12345' },
+});
+```
+
+Per-call override:
+
+```ts
+await client.deliver({
+  ...params,
+  provider: 'gmail',
+});
+```
+
+### SMTP
+
+```ts
+import { EmailUxApiClient } from '@emailux/api-client';
+
+const client = new EmailUxApiClient({
+  apiKey: process.env.EMAILUX_API_KEY!,
+  provider: 'smtp',
+});
+
+const result = await client.deliver({
+  experienceId: 'order-confirmation',
+  channelData: {
+    toEmail: 'customer@example.com',
+    fromEmail: 'noreply@yourdomain.com',
+  },
+  data: { orderId: '12345' },
+});
+```
+
+## Errors and non-HTTP failures
+
+- HTTP `4xx` / `5xx` responses set `ok: false` and include `status` and `error` (with parsed body when JSON).
+- Network timeouts, aborts, or other thrown errors surface as `ok: false`, `status: 0`, and `error.message` from the thrown error.
+
+## Requirements
+
+Node.js **>= 18** (native `fetch`).
+
+## Source and license
+
+Package source lives under [`packages/api-client`](https://github.com/iClasser/emailux/tree/main/packages/api-client) in the EmailUX monorepo. License: MIT.

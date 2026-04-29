@@ -1,7 +1,7 @@
 export type DeliveryProvider = 'gmail' | 'smtp' | 'sendgrid';
 
 /**
- * With `provider: 'sendgrid'`, `domain` is required. With Gmail/SMTP or no provider, `domain` is optional.
+ * With `provider: 'sendgrid'`, `sendgrid_domain` is required. With Gmail/SMTP or no provider, `sendgrid_domain` is optional.
  */
 export type EmailUxApiClientOptions = {
   baseUrl?: string;
@@ -10,8 +10,8 @@ export type EmailUxApiClientOptions = {
   fetchImplementation?: typeof fetch;
   timeoutMs?: number;
 } & (
-  | { provider: 'sendgrid'; domain: string }
-  | { provider?: Exclude<DeliveryProvider, 'sendgrid'>; domain?: string }
+  | { provider: 'sendgrid'; sendgridDomain: string }
+  | { provider?: Exclude<DeliveryProvider, 'sendgrid'>; sendgridDomain?: string }
 );
 
 export interface RenderParams {
@@ -44,10 +44,10 @@ export interface DeliverParams {
    */
   provider?: DeliveryProvider;
   /**
-   * Optional domain override for this call. Useful when a client is
-   * constructed in provider mode but still needs domain-based delivery.
+   * Optional sendgrid_domain override for this call. Useful when a client is
+   * constructed in provider mode but still needs sendgrid_domain-based delivery.
    */
-  domain?: string;
+  sendgridDomain?: string;
   channelData: {
     toEmail: string;
     fromEmail: string;
@@ -70,7 +70,7 @@ export interface DeliverResult {
 export class EmailUxApiClient {
   private readonly baseUrl: string;
   private readonly apiKey: string;
-  private readonly domain: string | undefined;
+  private readonly sendgridDomain: string | undefined;
   private readonly provider: DeliveryProvider | undefined;
   private readonly defaultLocale: string;
   private readonly fetchImpl: typeof fetch;
@@ -81,13 +81,13 @@ export class EmailUxApiClient {
 
     this.baseUrl = (options.baseUrl ?? 'https://render.emailux.com').replace(/\/$/, '');
     this.apiKey = options.apiKey;
-    this.domain = options.domain;
-    /** User is not required send sendgrid as provider */
-    if((!options.provider || options.provider === 'sendgrid') && !this.domain) {
-      throw new Error("EmailUxApiClient: 'domain' is required when provider is 'sendgrid'");
+    this.sendgridDomain = options.sendgridDomain;
+    /** User is not required send "sendgrid" as provider */
+    if((!options.provider || options.provider === 'sendgrid') && !this.sendgridDomain) {
+      throw new Error("EmailUxApiClient: 'sendgrid_domain' is required when provider is 'sendgrid'");
     }
     if(options.provider !== 'sendgrid') {
-      // Set provider if its not "sendgrid"
+      // Set provider if its not "sendgrid", for sendgrid no need to send
       this.provider = options.provider;
     }
     this.defaultLocale = options.defaultLocale ?? 'en-US';
@@ -104,6 +104,8 @@ export class EmailUxApiClient {
     const normalized = EmailUxApiClient.normalizeProvider(providerRaw);
     // Currently supported provider(s). Keep this conservative until expanded.
     if (normalized === 'gmail') return 'gmail';
+    if (normalized === 'smtp') return 'smtp';
+    // sendgrid provider not needed since its called by sendgrid_domain header
     return undefined;
   }
 
@@ -136,16 +138,16 @@ export class EmailUxApiClient {
   private resolveDeliverHeaders(params: DeliverParams): Record<string, string | undefined> {
     const providerRaw = params.provider ?? this.provider;
     const providerHeader = EmailUxApiClient.toProviderHeader(providerRaw);
-    const domainHeader = params.domain ?? this.domain;
+    const sendgrid_domainHeader = params.sendgridDomain ?? this.sendgridDomain;
 
-    if (!providerHeader && !domainHeader) {
+    if (!providerHeader && !sendgrid_domainHeader) {
       throw new Error(
-        "EmailUxApiClient: either 'domain' or provider 'gmail' is required to call deliver()"
+        "EmailUxApiClient: either 'sendgrid_domain' for 'sendgrid' provider, or provider 'gmail'/'smtp' is required to call deliver()"
       );
     }
 
     return {
-      'x-domain': domainHeader,
+      'x-sendgrid-domain': sendgrid_domainHeader,
       'x-provider': providerHeader,
     };
   }
@@ -195,9 +197,10 @@ export class EmailUxApiClient {
   }
 
   async render(params: RenderParams): Promise<RenderResult> {
-    if (!this.domain) {
-      throw new Error("EmailUxApiClient: 'domain' is required to call render()");
+    if (!this.sendgridDomain) {
+      throw new Error("EmailUxApiClient: 'sendgridDomain' is required to call render()");
     }
+
 
     const body = {
       experience_id: params.experienceId,
@@ -209,7 +212,7 @@ export class EmailUxApiClient {
     const res = await this.request<{ ok: boolean; html?: string; subject?: string }>(
       '/v1/render',
       body,
-      { 'x-domain': this.domain }
+      { 'x-sendgrid-domain': this.sendgridDomain }
     );
 
     if (!res.ok) {

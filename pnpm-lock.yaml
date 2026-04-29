@@ -143,6 +143,9 @@ importers:
 
   apps/playground:
     dependencies:
+      '@emailux/api-client':
+        specifier: workspace:^*
+        version: link:../../packages/api-client
       '@emailux/components':
         specifier: workspace:^*
         version: link:../../packages/components
@@ -322,6 +325,9 @@ importers:
       '@emailux/a':
         specifier: workspace:^1.0.1
         version: link:../a
+      '@emailux/api-client':
+        specifier: workspace:^1.0.0
+        version: link:../api-client
       '@emailux/badge':
         specifier: workspace:^1.0.1
         version: link:../badge

@@ -26,6 +26,10 @@
             "pages": ["getting-started/setup"]
           },
           {
+            "group": "API",
+            "pages": ["api/api-client"]
+          },
+          {
             "group": "Add-Ins",
             "pages": ["addins/outlook-html-import", "addins/gmail-html-inserter"]
           },
