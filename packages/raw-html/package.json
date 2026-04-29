@@ -1,6 +1,6 @@
 {
   "name": "@emailux/raw-html",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Raw HTML component to wrap emails (EmailUX Mailer)",
   "sideEffects": false,
   "main": "./dist/index.js",

@@ -5,7 +5,7 @@
   "description": "Turborepo for EmailUX-mailer components and apps",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iClasser/emailux"
+    "url": "git+https://github.com/iClasser/emailux.git"
   },
   "license": "MIT",
   "packageManager": "pnpm@10.13.1",
@@ -18,15 +18,15 @@
     "bump:patch": "node tools/bump-patch.js",
     "build:emailux": "pnpm -C rootPackage/emailux-email-comps build",
     "clean": "pnpm run clean:packages",
-    "clean:packages": "pnpm -r --filter './packages/*' --filter './rootPackage/*' run clean",
+    "clean:packages": "pnpm -r --filter './packages/*' run clean",
     "test": "turbo run test",
     "changeset": "changeset",
-    "changeset:build": "pnpm turbo run build --filter './packages/*' --filter './rootPackage/*'",
+    "changeset:build": "pnpm turbo run build --filter './packages/*'",
     "changeset:publish": "pnpm changeset publish",
-    "build:packages:publish": "pnpm turbo run build --filter './packages/*' --filter './rootPackage/*' && pnpm changeset publish",
+    "build:packages:publish": "pnpm turbo run build --filter './packages/*' && pnpm changeset publish",
     "lint": "echo 'no lint configured'",
     "version": "changeset version && pnpm install --no-frozen-lockfile",
-    "release": "turbo run build --filter=./packages/* --filter './rootPackage/*' && pnpm changeset publish",
+    "release": "turbo run build --filter=./packages/* && pnpm changeset publish",
     "clean:install": "pnpm clean && pnpm install && pnpm build && pnpm changeset",
     "playground": "pnpm -C apps/playground dev",
     "examples": "pnpm -C apps/examples dev",

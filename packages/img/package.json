@@ -1,6 +1,6 @@
 {
   "name": "@emailux/img",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Display an image in your email (EmailUX Mailer)",
   "sideEffects": false,
   "main": "./dist/index.js",

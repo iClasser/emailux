@@ -1,5 +1,14 @@
 # @emailux/body
 
+## 1.0.1
+
+### Patch Changes
+
+- Patch release: publish all EmailUX component packages.
+- Updated dependencies
+  - @emailux/body-contents@1.0.1
+  - @emailux/html@1.0.1
+
 ## 0.2.2
 
 ### Patch Changes

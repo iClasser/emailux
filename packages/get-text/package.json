@@ -1,6 +1,6 @@
 {
   "name": "@emailux/get-text",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React email helper to get the text only of a React email component (EmailUX Mailer)",
   "sideEffects": false,
   "main": "./dist/index.js",

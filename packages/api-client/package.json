@@ -1,39 +1,38 @@
 {
-  "name": "@emailux/head",
-  "version": "1.0.1",
-  "description": "A React email head component to wrap emails (EmailUX Mailer)",
+  "name": "@emailux/api-client",
+  "version": "0.0.1-alpha.4",
+  "description": "EmailUX API (EmailUX Render and Delivery)",
   "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist/**"
   ],
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      }
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "license": "MIT",
   "scripts": {
-    "build": "tsdown src/index.ts --format esm,cjs --dts --external react",
+    "build": "tsup src/index.ts --dts --format esm,cjs --out-dir dist --clean",
     "build:watch": "tsdown src/index.ts --format esm,cjs --dts --external react --watch",
+    "dev": "tsup src/index.ts --watch --dts --format esm,cjs --out-dir dist",
+    "prepublishOnly": "npm run build",
     "clean": "rm -rf dist && rm -rf node_modules && rm -rf .turbo",
     "test": "vitest run",
+    "release:dry-run": "npm pack --dry-run",
     "test:watch": "vitest",
     "prepack": "pnpm run build"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/iClasser/emailux",
-    "directory": "packages/head"
+    "directory": "packages/api-client"
   },
   "keywords": [
     "react",
@@ -43,19 +42,20 @@
     "react-email",
     "send-email",
     "email-component",
-    "emailux-mailer",
-    "emailux-email-comps",
+    "emailux-api",
+    "api-client",
+    "emailux-render",
+    "emailux-delivery",
     "emailux"
   ],
   "engines": {
     "node": ">=18.0.0"
   },
-  "peerDependencies": {
-    "react": "^18.0 || ^19.0 || ^19.0.0-rc"
-  },
   "devDependencies": {
     "tsconfig": "workspace:^0.1.0",
-    "typescript": "5.8.3"
+    "typescript": "5.8.3",
+    "tsup": "^8.3.0",
+    "rimraf": "^6.0.1"
   },
   "publishConfig": {
     "access": "public"

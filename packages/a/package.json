@@ -1,6 +1,6 @@
 {
   "name": "@emailux/a",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React email seperator component to wrap emails (EmailUX Mailer)",
   "sideEffects": false,
   "main": "./dist/index.js",

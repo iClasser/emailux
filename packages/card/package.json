@@ -1,6 +1,6 @@
 {
   "name": "@emailux/card",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React email card component to wrap emails (EmailUX Mailer)",
   "sideEffects": false,
   "main": "./dist/index.js",

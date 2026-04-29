@@ -1,6 +1,6 @@
 {
   "name": "@emailux/css",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React email css component to to style your email (EmailUX Mailer)",
   "sideEffects": false,
   "main": "./dist/index.js",
