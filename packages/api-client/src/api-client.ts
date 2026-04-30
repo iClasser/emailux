@@ -236,10 +236,10 @@ export class EmailUxApiClient {
       version: params.version,
       locale,
       channel_data: {
-        toEmail: params.channelData.toEmail,
-        toEmailName: params.channelData.toEmailName,
-        fromEmail: params.channelData.fromEmail,
-        fromEmailName: params.channelData.fromEmailName,
+        to_email: params.channelData.toEmail,
+        to_email_name: params.channelData.toEmailName,
+        from_email: params.channelData.fromEmail,
+        from_email_name: params.channelData.fromEmailName,
       },
       data: params.data ?? {},
     };

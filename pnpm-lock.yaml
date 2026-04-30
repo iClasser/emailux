@@ -326,7 +326,7 @@ importers:
         specifier: workspace:^1.0.1
         version: link:../a
       '@emailux/api-client':
-        specifier: workspace:^1.0.0
+        specifier: workspace:^1.0.1
         version: link:../api-client
       '@emailux/badge':
         specifier: workspace:^1.0.1
