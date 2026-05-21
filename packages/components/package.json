@@ -1,6 +1,6 @@
 {
   "name": "@emailux/components",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "All EmailUX email components in one package",
   "sideEffects": false,
   "main": "./dist/index.js",
@@ -63,7 +63,7 @@
     "@emailux/a": "workspace:^1.0.1",
     "@emailux/api-client": "workspace:^1.0.1",
     "@emailux/badge": "workspace:^1.0.1",
-    "@emailux/body": "workspace:^1.0.1",
+    "@emailux/body": "workspace:^1.0.2",
     "@emailux/body-contents": "workspace:^1.0.1",
     "@emailux/box": "workspace:^1.0.1",
     "@emailux/button": "workspace:^1.0.1",

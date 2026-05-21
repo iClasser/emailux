@@ -28,6 +28,7 @@ export interface BodyProps extends React.ComponentPropsWithoutRef<"body"> {
   dir?: string;
   borderWidth?: number;
   borderColor?: string;
+  openCounter?: boolean;
 }
 
 export enum BodyClassNamesEnum {
@@ -62,6 +63,7 @@ export const Body: React.FC<BodyProps> = ({
   bgImageTakesAllWrappers = false,
   borderWidth = 0,
   borderColor = "#e5e5e5",
+  openCounter = true,
   ...props
 }) => {
   const htmlContext = React.useContext(HtmlContext);
@@ -147,6 +149,7 @@ export const Body: React.FC<BodyProps> = ({
           </tr>
         </table>
       )}
+      {openCounter && React.createElement("custom", { type: "tracking" })}
     </body>
   );
 };

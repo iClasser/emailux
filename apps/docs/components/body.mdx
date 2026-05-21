@@ -63,6 +63,19 @@ export default function EmailTemplate() {
 | bgImageTakesAllWrappers | string | no | false | when there is background image url takes all if width is not 100%, but with 100% it already takes all  |
 | borderWidth | number | No | — | border width of the body |
 | borderColor | string | No | — | Border will work if border width is greater than 0 |
+| openCounter | boolean | No | `true` | When enabled, appends `<custom type="tracking"/>` at the end of the body content. This tag has no visual effect on the rendered email. |
 
 
 All other standard attributes for the `<body>` element are supported.
+
+## Open counter tracking
+
+By default, `Body` appends a `<custom type="tracking"/>` tag as the last element inside `<body>`. This tag does not affect how the email looks in inboxes and is intended for open-counter tracking in downstream email pipelines.
+
+```tsx
+// Tracking tag is included by default
+<Body>...</Body>
+
+// Disable the tracking tag
+<Body openCounter={false}>...</Body>
+```

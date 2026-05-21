@@ -1,6 +1,6 @@
 {
   "name": "@emailux/body",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A React email head component to wrap emails (EmailUX Mailer)",
   "sideEffects": false,
   "main": "./dist/index.js",
