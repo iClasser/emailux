@@ -1,5 +1,42 @@
 # @emailux/components
 
+## 1.1.0
+
+### Minor Changes
+
+- 6263b4a: Fixed API paths for api-client
+- Support React 16.8 through 19. Widen the `react` peer range to `^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0`, move `react-dom` from `dependencies` to `peerDependencies` in `get-html`/`get-text` (it was a hard dependency pinned to 19, which broke consumers on other React versions or without react-dom), and replace `Object.hasOwn` with `Object.prototype.hasOwnProperty.call` for older-runtime safety.
+
+### Patch Changes
+
+- 58c39c0: Email UX api-client released
+- Updated dependencies [69dea3e]
+- Updated dependencies [6263b4a]
+- Updated dependencies
+- Updated dependencies [58c39c0]
+- Updated dependencies [69dea3e]
+  - @emailux/api-client@2.0.0
+  - @emailux/a@1.1.0
+  - @emailux/badge@1.1.0
+  - @emailux/body@1.1.0
+  - @emailux/body-contents@1.1.0
+  - @emailux/box@1.1.0
+  - @emailux/button@1.1.0
+  - @emailux/card@1.1.0
+  - @emailux/css@1.1.0
+  - @emailux/font@1.1.0
+  - @emailux/get-html@1.1.0
+  - @emailux/get-text@1.1.0
+  - @emailux/head@1.1.0
+  - @emailux/hr@1.1.0
+  - @emailux/html@1.1.0
+  - @emailux/img@1.1.0
+  - @emailux/li@1.1.0
+  - @emailux/ol@1.1.0
+  - @emailux/table@1.1.0
+  - @emailux/text@1.1.0
+  - @emailux/ul@1.1.0
+
 ## 1.0.1
 
 ### Patch Changes

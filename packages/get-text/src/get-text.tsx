@@ -121,7 +121,7 @@ function decodeEntities(input: string): string {
         return String.fromCharCode(codePoint);
       }
       const key = entity.toLowerCase();
-      return Object.hasOwn(named, key)
+      return Object.prototype.hasOwnProperty.call(named, key)
         ? named[key as keyof typeof named]
         : `&${entity};`;
     })
