@@ -332,67 +332,67 @@ importers:
   packages/components:
     dependencies:
       '@emailux/a':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../a
       '@emailux/api-client':
-        specifier: workspace:^2.0.0
+        specifier: workspace:^2.1.0
         version: link:../api-client
       '@emailux/badge':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../badge
       '@emailux/body':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../body
       '@emailux/body-contents':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../body-contents
       '@emailux/box':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../box
       '@emailux/button':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../button
       '@emailux/card':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../card
       '@emailux/css':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../css
       '@emailux/font':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../font
       '@emailux/get-html':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../get-html
       '@emailux/get-text':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../get-text
       '@emailux/head':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../head
       '@emailux/hr':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../hr
       '@emailux/html':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../html
       '@emailux/img':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../img
       '@emailux/li':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../li
       '@emailux/ol':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../ol
       '@emailux/table':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../table
       '@emailux/text':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../text
       '@emailux/ul':
-        specifier: workspace:^1.1.0
+        specifier: workspace:^1.2.0
         version: link:../ul
       react:
         specifier: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0

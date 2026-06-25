@@ -1,5 +1,45 @@
 # @emailux/components
 
+## 1.2.0
+
+### Minor Changes
+
+- 1a2ada2: Support for React 16 up to 19.
+
+### Patch Changes
+
+- Fix package entry points so CommonJS, bundlers, and TypeScript resolve correctly.
+
+  The `main`, `types`, and `exports["."].require` fields pointed at `dist/index.js`
+  and `dist/index.d.ts`, which the build never emits. The CJS entry now points at the
+  real `dist/index.cjs` / `dist/index.d.cts` (and `api-client` gets condition-correct
+  per-branch types). This fixes `MODULE_NOT_FOUND` under Node CommonJS, `require.resolve`,
+  and webpack's `require` condition (e.g. `next build`), with no public API or runtime changes.
+
+- Updated dependencies [1a2ada2]
+- Updated dependencies
+  - @emailux/body-contents@1.2.0
+  - @emailux/api-client@2.1.0
+  - @emailux/get-html@1.2.0
+  - @emailux/get-text@1.2.0
+  - @emailux/button@1.2.0
+  - @emailux/badge@1.2.0
+  - @emailux/table@1.2.0
+  - @emailux/body@1.2.0
+  - @emailux/card@1.2.0
+  - @emailux/font@1.2.0
+  - @emailux/head@1.2.0
+  - @emailux/html@1.2.0
+  - @emailux/text@1.2.0
+  - @emailux/box@1.2.0
+  - @emailux/css@1.2.0
+  - @emailux/img@1.2.0
+  - @emailux/hr@1.2.0
+  - @emailux/li@1.2.0
+  - @emailux/ol@1.2.0
+  - @emailux/ul@1.2.0
+  - @emailux/a@1.2.0
+
 ## 1.1.0
 
 ### Minor Changes

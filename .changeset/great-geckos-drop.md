@@ -24,4 +24,4 @@
 "@emailux/a": minor
 ---
 
-Support for React 16 up to 19.
+CommonJS and other types of exports added for broader compatibility.

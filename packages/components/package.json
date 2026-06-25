@@ -1,11 +1,11 @@
 {
   "name": "@emailux/components",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "All EmailUX email components in one package",
   "sideEffects": false,
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.cts",
   "files": [
     "dist/**"
   ],
@@ -16,8 +16,8 @@
         "default": "./dist/index.mjs"
       },
       "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
       }
     }
   },
@@ -61,27 +61,27 @@
     "tsconfig": "workspace:*"
   },
   "dependencies": {
-    "@emailux/a": "workspace:^1.1.0",
-    "@emailux/api-client": "workspace:^2.0.0",
-    "@emailux/badge": "workspace:^1.1.0",
-    "@emailux/body": "workspace:^1.1.0",
-    "@emailux/body-contents": "workspace:^1.1.0",
-    "@emailux/box": "workspace:^1.1.0",
-    "@emailux/button": "workspace:^1.1.0",
-    "@emailux/card": "workspace:^1.1.0",
-    "@emailux/css": "workspace:^1.1.0",
-    "@emailux/font": "workspace:^1.1.0",
-    "@emailux/get-html": "workspace:^1.1.0",
-    "@emailux/get-text": "workspace:^1.1.0",
-    "@emailux/head": "workspace:^1.1.0",
-    "@emailux/html": "workspace:^1.1.0",
-    "@emailux/hr": "workspace:^1.1.0",
-    "@emailux/img": "workspace:^1.1.0",
-    "@emailux/li": "workspace:^1.1.0",
-    "@emailux/ol": "workspace:^1.1.0",
-    "@emailux/table": "workspace:^1.1.0",
-    "@emailux/text": "workspace:^1.1.0",
-    "@emailux/ul": "workspace:^1.1.0"
+    "@emailux/a": "workspace:^1.2.0",
+    "@emailux/api-client": "workspace:^2.1.0",
+    "@emailux/badge": "workspace:^1.2.0",
+    "@emailux/body": "workspace:^1.2.0",
+    "@emailux/body-contents": "workspace:^1.2.0",
+    "@emailux/box": "workspace:^1.2.0",
+    "@emailux/button": "workspace:^1.2.0",
+    "@emailux/card": "workspace:^1.2.0",
+    "@emailux/css": "workspace:^1.2.0",
+    "@emailux/font": "workspace:^1.2.0",
+    "@emailux/get-html": "workspace:^1.2.0",
+    "@emailux/get-text": "workspace:^1.2.0",
+    "@emailux/head": "workspace:^1.2.0",
+    "@emailux/html": "workspace:^1.2.0",
+    "@emailux/hr": "workspace:^1.2.0",
+    "@emailux/img": "workspace:^1.2.0",
+    "@emailux/li": "workspace:^1.2.0",
+    "@emailux/ol": "workspace:^1.2.0",
+    "@emailux/table": "workspace:^1.2.0",
+    "@emailux/text": "workspace:^1.2.0",
+    "@emailux/ul": "workspace:^1.2.0"
   },
   "publishConfig": {
     "access": "public"

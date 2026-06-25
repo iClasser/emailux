@@ -1,10 +1,10 @@
 {
   "name": "@emailux/api-client",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "EmailUX API (EmailUX Render and Delivery)",
   "sideEffects": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
   "files": [
@@ -12,9 +12,14 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
   "license": "MIT",
