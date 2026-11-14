@@ -4,6 +4,17 @@ import stripeOtp from "./examples/stripe/stripeOtp"
 import stripeResetPassword from "./examples/stripe/stripeResetPassword";
 import stripeMarketingEm from "./examples/stripe/stripeMarketingEm";
 import stripeReceipt from "./examples/stripe/stripeReceipt";
+import northwindOrder from "./examples/northwind/northwindOrder";
+import northwindShipping from "./examples/northwind/northwindShipping";
+import northwindCart from "./examples/northwind/northwindCart";
+import fieldnoteInvite from "./examples/fieldnote/fieldnoteInvite";
+import fieldnoteTrial from "./examples/fieldnote/fieldnoteTrial";
+import fieldnoteReport from "./examples/fieldnote/fieldnoteReport";
+import meridianNewsletter from "./examples/meridian/meridianNewsletter";
+import meridianEvent from "./examples/meridian/meridianEvent";
+import signatureCorporate from "./examples/signatures/signatureCorporate";
+import signatureMinimal from "./examples/signatures/signatureMinimal";
+import signatureBanner from "./examples/signatures/signatureBanner";
 export const emailExamples: BrandCategory[] = [
   {
     id: "stripe",
@@ -15,6 +26,26 @@ export const emailExamples: BrandCategory[] = [
       stripeMarketingEm,
       stripeReceipt,
     ],
+  },
+  {
+    id: "northwind",
+    name: "Northwind Market (E-commerce)",
+    examples: [northwindOrder, northwindShipping, northwindCart],
+  },
+  {
+    id: "fieldnote",
+    name: "Fieldnote (SaaS)",
+    examples: [fieldnoteInvite, fieldnoteTrial, fieldnoteReport],
+  },
+  {
+    id: "meridian",
+    name: "Meridian (Newsletter & Events)",
+    examples: [meridianNewsletter, meridianEvent],
+  },
+  {
+    id: "email-signatures",
+    name: "Email Signatures",
+    examples: [signatureCorporate, signatureMinimal, signatureBanner],
   },
 //   {
 //     id: "github",

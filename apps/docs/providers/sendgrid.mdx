@@ -1,0 +1,65 @@
+---
+title: "Send with SendGrid and EmailUX"
+sidebarTitle: "SendGrid"
+description: "Add a SendGrid domain to EmailUX, save your SendGrid API key, and render or deliver templates with @emailux/api-client."
+icon: "send"
+keywords: ["SendGrid domain", "SendGrid API key", "SendGrid email templates API"]
+---
+
+A SendGrid domain gives you the full API: **`render()`** and **`deliver()`**.
+
+<Steps>
+  <Step title="Authenticate your domain in SendGrid">
+    In SendGrid, authenticate the domain you will send from, so SPF and DKIM pass. See the [email authentication guide](https://www.emailux.com/guides/email-authentication).
+  </Step>
+  <Step title="Add the domain in EmailUX">
+    Open **Emails, Providers and API Keys** and choose **Add domain (SendGrid)**. Enter your domain, such as `yourdomain.com`, and select **Create**.
+  </Step>
+  <Step title="Configure the delivery provider">
+    In the domain card, open **Configure delivery provider**, select **SendGrid**, paste your SendGrid API key, and **Save**. The key is stored for this domain. Choose **Provider status** to confirm the connection.
+  </Step>
+  <Step title="Add sender emails">
+    Add the sender addresses you will use, for example `hello@yourdomain.com`. When a provider is configured, the domain's API key is authorized for the domain, so each sender does not need separate verification.
+  </Step>
+  <Step title="Generate an API key">
+    Select **Generate API key**. The domain must not be pending. See [API keys](/providers/api-keys).
+  </Step>
+  <Step title="Call the API">
+    ```ts
+    import { EmailUxApiClient } from '@emailux/api-client';
+
+    const client = new EmailUxApiClient({
+      apiKey: process.env.EMAILUX_API_KEY!,
+      sendgridDomain: 'yourdomain.com',
+    });
+
+    const sent = await client.deliver({
+      experienceId: 'welcome_email',
+      channelData: {
+        toEmail: 'alex@example.com',
+        fromEmail: 'hello@yourdomain.com',
+        fromEmailName: 'Your product',
+      },
+      data: { nameTo: 'Alex' },
+    });
+    ```
+  </Step>
+</Steps>
+
+## Removing a domain
+
+Deleting a domain also removes its provider configuration, all of its API keys and all of its sender emails. You confirm by typing `Delete yourdomain.com`. This cannot be undone.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Generate API key is disabled">
+    The domain is still pending. Finish the domain verification, then try again.
+  </Accordion>
+  <Accordion title="I get a 502 provider error">
+    SendGrid rejected the request. Check that the saved key has mail-send permission and that the sender uses your authenticated domain.
+  </Accordion>
+  <Accordion title="I get a 401">
+    The API key is wrong or revoked. Generate a new one.
+  </Accordion>
+</AccordionGroup>

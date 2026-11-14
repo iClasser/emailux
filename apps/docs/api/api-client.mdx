@@ -1,12 +1,36 @@
 ---
-title: "API client (@emailux/api-client)"
+title: "EmailUX API client (@emailux/api-client)"
 sidebarTitle: "API client"
-description: "TypeScript client for EmailUX render and deliver APIs."
+description: "TypeScript client for the EmailUX render and deliver APIs. Render templates to HTML, or send them through SendGrid, Gmail or SMTP with your own provider."
 "og:image": "https://d2b7lfzqawhc0u.cloudfront.net/emailux/logo/favicon.png"
 icon: "cube"
+keywords: ["EmailUX API", "transactional email API", "send email from template", "SendGrid Gmail SMTP API client"]
 ---
 
-The [`@emailux/api-client`](https://www.npmjs.com/package/@emailux/api-client) package calls the EmailUX HTTP API: **`render`** (HTML by template) and **`deliver`** (render + send via a provider).
+The [`@emailux/api-client`](https://www.npmjs.com/package/@emailux/api-client) package calls the EmailUX HTTP API with two operations:
+
+- **`render()`** returns the HTML and subject for an Email Studio template.
+- **`deliver()`** renders the template and sends it through the provider you connected: SendGrid, Gmail (Google Workspace) or SMTP.
+
+The same snippets appear in your dashboard under **Emails, Providers and API Keys, How to use API**.
+
+<Note>
+  EmailUX is not the sender of record. Your provider delivers the email, so your domain and reputation stay yours.
+</Note>
+
+## Before you start
+
+<Steps>
+  <Step title="Connect a provider">
+    Add a SendGrid domain, a Gmail (Google Workspace) account or an SMTP mailbox. See [Providers](/providers/overview).
+  </Step>
+  <Step title="Create an API key">
+    Generate a key for your domain or provider. See [API keys](/providers/api-keys).
+  </Step>
+  <Step title="Design a template">
+    Build the email in Email Studio and note its **experience ID** (the email ID). See [Design your first email](/email-studio/design-your-first-email).
+  </Step>
+</Steps>
 
 ## Installation
 
@@ -16,12 +40,12 @@ The [`@emailux/api-client`](https://www.npmjs.com/package/@emailux/api-client) p
 npm install @emailux/api-client
 ```
 
-```sh yarn
-yarn add @emailux/api-client
-```
-
 ```sh pnpm
 pnpm add @emailux/api-client
+```
+
+```sh yarn
+yarn add @emailux/api-client
 ```
 
 ```sh bun
@@ -30,191 +54,224 @@ bun add @emailux/api-client
 
 </CodeGroup>
 
-## Default base URL
+Requires Node.js **18 or later** (native `fetch`).
 
-All requests use:
+## Which provider supports what
 
-`https://render.emailux.com`
+| Provider | `render()` | `deliver()` | Client configuration |
+| --- | --- | --- | --- |
+| **SendGrid domain** | Yes | Yes | `sendgridDomain` (required) |
+| **Gmail ESP** | No, unless `sendgridDomain` is also set | Yes | `provider: 'gmail'` |
+| **SMTP ESP** | No, unless `sendgridDomain` is also set | Yes | `provider: 'smtp'` |
 
-Override with `baseUrl` in the client options if you use a custom deployment.
-
-**OpenAPI (Swagger):** The live spec for your deployment is at **`{baseUrl}/swagger.json`** (for example [`https://render.emailux.com/swagger.json`](https://render.emailux.com/swagger.json)). Use it for the latest paths, headers, bodies, and response codes.
+`render()` always needs a SendGrid domain on the client. For Gmail-only or SMTP-only sending, preview templates in Email Studio, or add a SendGrid domain to use the render API.
 
 ## Client options
 
 | Option | Description |
-|--------|-------------|
-| `apiKey` | Required. Sent as `x-api-key`. |
-| `baseUrl` | Optional. Defaults to `https://render.emailux.com` (trailing slash is stripped). |
-| `defaultLocale` | Optional. Default `en-US`; used when `locale` is omitted on `deliver` / `render`. |
-| `fetchImplementation` | Optional. Custom `fetch` (e.g. for tests or edge runtimes). |
-| `timeoutMs` | Optional. Request timeout via `AbortSignal`. |
-| `provider` | One of `sendgrid`, `gmail`, or `smtp`. Affects **deliver** defaults (see below). |
-| `sendgridDomain` | Required when using SendGrid (default provider). Your SendGrid-authenticated domain identifier. |
+| --- | --- |
+| `apiKey` | **Required.** Sent as the `x-api-key` header. |
+| `sendgridDomain` | Your verified SendGrid domain, such as `mail.yourdomain.com`. **Required** when `provider` is `'sendgrid'` or omitted. Optional for Gmail and SMTP. |
+| `provider` | `'sendgrid'`, `'gmail'` or `'smtp'`. Omitting it means SendGrid. |
+| `baseUrl` | Optional. Defaults to `https://render.emailux.com`. A trailing slash is removed. |
+| `defaultLocale` | Optional. Defaults to `en-US`. Used when a call omits `locale`. |
+| `timeoutMs` | Optional. Aborts the request after this many milliseconds. |
+| `fetchImplementation` | Optional. A custom `fetch`, for tests or edge runtimes. |
 
-**Render** in this package is only supported with a **SendGrid domain** configured (`sendgridDomain` is required for `render()`). Delivery can use **SendGrid**, **Gmail**, or **SMTP** via `provider` and optional per-call overrides.
+The constructor throws if `apiKey` is missing, or if SendGrid is selected without `sendgridDomain`.
 
-**HTTP mapping:** The client sends your domain as the `x-sendgrid-domain` header on render/deliver. The public API may also document this as `x-domain`; behavior depends on your EmailUX API version.
+<Warning>
+  Use **`locale`** on each call, not `language`.
+</Warning>
 
-## `render()` — HTML only
+## Request headers
 
-Calls `POST /v1/render` with a JSON body:
+The client builds these headers for you. They match the REST API.
 
-- `experience_id` (required)
-- `version` (optional)
-- `locale` (optional; falls back to `defaultLocale`)
-- `data` (object; defaults to `{}`)
+| Header | When it is sent |
+| --- | --- |
+| `x-api-key` | Always. |
+| `x-sendgrid-domain` | `render()`, and `deliver()` when a SendGrid domain is set. |
+| `x-provider` | `deliver()` with `gmail` or `smtp`. |
 
-### Response codes (`/v1/render`)
+## `render()`
 
-| Status | Meaning |
-|--------|---------|
-| `200` | Success. JSON includes `ok`, `html`, `subject`. |
-| `400` | Validation error |
-| `401` | Unauthorized |
-| `404` | Not found |
+Calls `POST /v1/render` and returns HTML and the subject.
 
-On success, the client returns `{ ok: true, status, html?, subject? }`. On failure, `{ ok: false, status, error }` with `error.message` and optional `error.body`.
-
-### Example (SendGrid domain — required for render)
+| Parameter | Description |
+| --- | --- |
+| `experienceId` | **Required.** The Email Studio email ID. |
+| `version` | Optional template version number. |
+| `locale` | Optional. Falls back to `defaultLocale`. |
+| `data` | Optional object with your template variables. |
 
 ```ts
 import { EmailUxApiClient } from '@emailux/api-client';
 
 const client = new EmailUxApiClient({
   apiKey: process.env.EMAILUX_API_KEY!,
-  sendgridDomain: 'mail.yourdomain.com', // your EmailUX / SendGrid domain
+  sendgridDomain: 'your-verified-domain.com',
+  defaultLocale: 'en-US',
+  timeoutMs: 10000,
 });
 
-const result = await client.render({
-  experienceId: 'welcome-email',
-  version: 1,
+const rendered = await client.render({
+  experienceId: 'welcome_email',
   locale: 'en-US',
-  data: { firstName: 'Ada' },
+  data: { nameTo: 'Alex' },
 });
 
-if (result.ok) {
-  console.log(result.subject, result.html?.slice(0, 200));
+if (rendered.ok) {
+  console.log(rendered.subject, rendered.html);
 } else {
-  console.error(result.status, result.error);
+  console.error(rendered.status, rendered.error);
 }
 ```
-
-## `deliver()` — render and queue send
-
-Calls `POST /v1/deliver` with a JSON body:
-
-- `experience_id` (required)
-- `tenant` — not set by this client; use API keys and headers if your backend requires it when `x-domain` is omitted (see `swagger.json` for your deployment).
-- `version`, `locale` (optional)
-- `channel_data` (required): `toEmail`, `fromEmail`, optional `toEmailName`, `fromEmailName`
-- `data` (object; defaults to `{}`)
-
-Optional headers the client may send:
-
-- `x-provider`: `gmail` or `smtp` when using those providers (SendGrid uses the domain header path, so `x-provider` is omitted for SendGrid).
-
-### Response codes (`/v1/deliver`)
 
 | Status | Meaning |
-|--------|---------|
-| `200` | Success. JSON includes `ok`, `message`. |
-| `400` | Validation error |
-| `401` | Unauthorized |
-| `404` | Not found |
-| `502` | Provider error |
+| --- | --- |
+| `200` | Success. Returns `html` and `subject`. |
+| `400` | Validation error. |
+| `401` | Unauthorized. Check the API key. |
+| `404` | Template not found. |
 
-### SendGrid
+## `deliver()`
 
-Default provider is SendGrid; `sendgridDomain` is required on the client.
+Calls `POST /v1/deliver`. It renders the template and sends it through your provider.
+
+| Parameter | Description |
+| --- | --- |
+| `experienceId` | **Required.** The Email Studio email ID. |
+| `channelData.toEmail` | **Required.** Recipient address. |
+| `channelData.fromEmail` | **Required.** Sender address. |
+| `channelData.toEmailName` | Optional recipient name. |
+| `channelData.fromEmailName` | Optional sender name. |
+| `version`, `locale`, `data` | Same as `render()`. |
+| `provider` | Optional per-call provider override: `'gmail'`, `'smtp'` or `'sendgrid'`. |
+| `sendgridDomain` | Optional per-call SendGrid domain override. |
+
+Each call needs either a SendGrid domain or a `gmail` or `smtp` provider. Otherwise the client throws.
+
+| Status | Meaning |
+| --- | --- |
+| `200` | Success. Returns `ok` and `message`. |
+| `400` | Validation error. |
+| `401` | Unauthorized. |
+| `404` | Not found. |
+| `502` | Provider error. |
+
+### Deliver with a SendGrid domain
 
 ```ts
-import { EmailUxApiClient } from '@emailux/api-client';
-
 const client = new EmailUxApiClient({
   apiKey: process.env.EMAILUX_API_KEY!,
-  provider: 'sendgrid',
-  sendgridDomain: 'mail.yourdomain.com',
+  sendgridDomain: 'your-verified-domain.com',
 });
 
-const result = await client.deliver({
-  experienceId: 'order-confirmation',
+const sent = await client.deliver({
+  experienceId: 'welcome_email',
+  locale: 'en-US',
   channelData: {
-    toEmail: 'customer@example.com',
-    toEmailName: 'Customer',
-    fromEmail: 'orders@yourdomain.com',
-    fromEmailName: 'Your Store',
+    toEmail: 'alex@example.com',
+    toEmailName: 'Alex',
+    fromEmail: 'hello@your-verified-domain.com',
+    fromEmailName: 'Your product',
   },
-  data: { orderId: '12345' },
+  data: { nameTo: 'Alex' },
 });
-
-if (result.ok) {
-  console.log(result.message);
-} else {
-  console.error(result.status, result.error);
-}
 ```
 
-You can omit `provider: 'sendgrid'`; the client still requires `sendgridDomain` for that configuration.
+Setup guide: [SendGrid](/providers/sendgrid).
 
-### Gmail
+### Deliver with Gmail
 
 ```ts
-import { EmailUxApiClient } from '@emailux/api-client';
-
 const client = new EmailUxApiClient({
   apiKey: process.env.EMAILUX_API_KEY!,
   provider: 'gmail',
+  defaultLocale: 'en-US',
+  timeoutMs: 10000,
 });
 
-const result = await client.deliver({
-  experienceId: 'order-confirmation',
-  channelData: {
-    toEmail: 'customer@example.com',
-    fromEmail: 'noreply@yourdomain.com',
-  },
-  data: { orderId: '12345' },
-});
-```
-
-Per-call override:
-
-```ts
 await client.deliver({
-  ...params,
-  provider: 'gmail',
+  experienceId: 'welcome_email',
+  locale: 'en-US',
+  channelData: {
+    toEmail: 'alex@example.com',
+    toEmailName: 'Alex',
+    fromEmail: 'your-connected-sender@example.com',
+    fromEmailName: 'Your product',
+  },
+  data: { nameTo: 'Alex' },
 });
 ```
 
-### SMTP
+`fromEmail` must match your connected sender. Setup guide: [Gmail](/providers/gmail).
+
+### Deliver with SMTP
 
 ```ts
-import { EmailUxApiClient } from '@emailux/api-client';
-
 const client = new EmailUxApiClient({
   apiKey: process.env.EMAILUX_API_KEY!,
   provider: 'smtp',
+  defaultLocale: 'en-US',
+  timeoutMs: 10000,
 });
 
-const result = await client.deliver({
-  experienceId: 'order-confirmation',
+await client.deliver({
+  experienceId: 'welcome_email',
+  locale: 'en-US',
   channelData: {
-    toEmail: 'customer@example.com',
-    fromEmail: 'noreply@yourdomain.com',
+    toEmail: 'alex@example.com',
+    fromEmail: 'your-connected-sender@example.com',
   },
-  data: { orderId: '12345' },
+  data: { nameTo: 'Alex' },
 });
 ```
 
-## Errors and non-HTTP failures
+Setup guide: [SMTP and IMAP](/providers/smtp-imap).
 
-- HTTP `4xx` / `5xx` responses set `ok: false` and include `status` and `error` (with parsed body when JSON).
-- Network timeouts, aborts, or other thrown errors surface as `ok: false`, `status: 0`, and `error.message` from the thrown error.
+### Override the provider per call
 
-## Requirements
+```ts
+await client.deliver({
+  experienceId: 'welcome_email',
+  provider: 'gmail',
+  channelData: { toEmail: 'alex@example.com', fromEmail: 'sender@example.com' },
+});
+```
 
-Node.js **>= 18** (native `fetch`).
+### Render with SendGrid, send with Gmail or SMTP
+
+Set both on one client to use the render API and still deliver through Gmail:
+
+```ts
+const client = new EmailUxApiClient({
+  apiKey: process.env.EMAILUX_API_KEY!,
+  provider: 'gmail',
+  sendgridDomain: 'your-verified-domain.com',
+});
+```
+
+## Handle errors
+
+Every method returns an object instead of throwing on HTTP failures.
+
+- HTTP `4xx` and `5xx` responses return `ok: false`, the `status`, and `error` with the parsed response body.
+- Timeouts, aborts and network failures return `ok: false`, `status: 0` and `error.message`.
+- Only configuration mistakes throw, such as a missing `apiKey`.
+
+```ts
+const result = await client.deliver(params);
+if (!result.ok) {
+  console.error(result.status, result.error?.message, result.error?.body);
+}
+```
+
+## OpenAPI spec
+
+The live spec is at [`https://render.emailux.com/swagger.json`](https://render.emailux.com/swagger.json). It lists the latest paths, headers and response codes.
 
 ## Source and license
 
-Package source lives under [`packages/api-client`](https://github.com/iClasser/emailux/tree/main/packages/api-client) in the EmailUX monorepo. License: MIT.
+The package source lives under [`packages/api-client`](https://github.com/iClasser/emailux/tree/main/packages/api-client) in the EmailUX monorepo. License: MIT.

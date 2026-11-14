@@ -62,6 +62,16 @@
             ]
           },
           {
+            "group": "Providers",
+            "pages": [
+              "providers/overview",
+              "providers/sendgrid",
+              "providers/gmail",
+              "providers/smtp-imap",
+              "providers/api-keys"
+            ]
+          },
+          {
             "group": "Add-Ins",
             "pages": [
               "addins/outlook-html-import",

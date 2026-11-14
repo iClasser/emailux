@@ -1,0 +1,42 @@
+---
+title: "Create and manage EmailUX API keys"
+sidebarTitle: "API keys"
+description: "Generate, copy and revoke EmailUX API keys for your domains and providers, and use them with the API client."
+icon: "key"
+keywords: ["EmailUX API key", "x-api-key", "revoke API key"]
+---
+
+An API key authenticates your calls with the `x-api-key` header. The API client sends it for you.
+
+## Create a key
+
+<Steps>
+  <Step title="Open your domain or provider">
+    Go to **Emails, Providers and API Keys** and find the card for your domain or provider.
+  </Step>
+  <Step title="Generate the key">
+    Select **Generate API key**. For a SendGrid domain, the domain must be verified first. The button is disabled while it is pending.
+  </Step>
+  <Step title="Copy and store it">
+    Copy the key and keep it in a secret store or an environment variable such as `EMAILUX_API_KEY`.
+  </Step>
+</Steps>
+
+```ts
+const client = new EmailUxApiClient({
+  apiKey: process.env.EMAILUX_API_KEY!,
+  sendgridDomain: 'yourdomain.com',
+});
+```
+
+<Warning>
+  Never put an API key in client-side code or a public repository. Call EmailUX from your server.
+</Warning>
+
+## Revoke a key
+
+Choose **Revoke** next to the key. Revocation is **immediate and cannot be undone**, and revoked keys are shown with a *revoked* badge. Create a new key and update your environment variable.
+
+## Troubleshooting
+
+A `401` response means the key is missing, wrong or revoked. See the [API client](/api/api-client).

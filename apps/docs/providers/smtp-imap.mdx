@@ -1,0 +1,93 @@
+---
+title: "Send email through SMTP and IMAP"
+sidebarTitle: "SMTP and IMAP"
+description: "Connect any SMTP mailbox to EmailUX, with presets for Gmail, Fastmail, Yahoo, Zoho, GoDaddy, SendGrid, Mailgun, Amazon SES and Yandex. Includes CSV bulk import."
+icon: "server"
+keywords: ["SMTP email API", "connect SMTP", "IMAP", "Mailgun SMTP", "Amazon SES SMTP", "Zoho SMTP"]
+---
+
+Connect a mailbox over SMTP to send with **`deliver()`**. IMAP is optional and used for receiving.
+
+<Steps>
+  <Step title="Open the form">
+    Go to **Emails, Providers and API Keys**, choose **Add provider**, and select the **SMTP** tab. Title: **Connect Email Account (SMTP/IMAP)**.
+  </Step>
+  <Step title="Pick your provider">
+    Select a preset to fill the host, port and encryption, or choose **Other** and enter them yourself.
+  </Step>
+  <Step title="Enter the account">
+    Fill in the email address, display name and password or API key. Use a different username only if your provider needs one.
+  </Step>
+  <Step title="Test both sides">
+    Select **Test SMTP Connection**, and **Test IMAP Connection** if you use IMAP.
+  </Step>
+  <Step title="Connect and save">
+    Select **Connect and Save**. Then [create an API key](/providers/api-keys).
+  </Step>
+  <Step title="Deliver">
+    ```ts
+    const client = new EmailUxApiClient({
+      apiKey: process.env.EMAILUX_API_KEY!,
+      provider: 'smtp',
+    });
+
+    await client.deliver({
+      experienceId: 'welcome_email',
+      channelData: {
+        toEmail: 'alex@example.com',
+        fromEmail: 'your-connected-sender@yourdomain.com',
+      },
+      data: { nameTo: 'Alex' },
+    });
+    ```
+  </Step>
+</Steps>
+
+## Provider presets
+
+These values are the form defaults. Check your provider's documentation if a connection fails.
+
+| Preset | SMTP host | Port and encryption | Password field |
+| --- | --- | --- | --- |
+| Gmail / GSuite | `smtp.gmail.com` | 465, SSL | App password |
+| Fastmail | `smtp.fastmail.com` | 465, SSL | Password |
+| Yahoo Mail | `smtp.mail.yahoo.com` | 465, SSL | Password |
+| Zoho | `smtp.zoho.com` | 465, SSL | Password |
+| GoDaddy | `smtpout.secureserver.net` | 465, SSL | Password |
+| SendGrid | `smtp.sendgrid.net` | 465, SSL | Password or API key |
+| Mailgun | `smtp.mailgun.org` | 465, SSL | Password or API key |
+| Amazon SES | `smtp.amazonaws.com` | 465, SSL | Password or API key |
+| Yandex | `smtp.yandex.com` | 465, SSL | Password |
+| Other | your host | 587, TLS by default | Password or API key |
+
+<Warning>
+  Amazon SES uses regional SMTP hosts such as `email-smtp.us-east-1.amazonaws.com`, and SMTP credentials that differ from your AWS login. Replace the preset host with your region's host.
+</Warning>
+
+## Gmail over SMTP
+
+Use an **app password**, not your normal password.
+
+1. Turn on 2-step verification for the Google account.
+2. Create an app password and paste it into the password field.
+3. Use host `smtp.gmail.com`, port 465 with SSL.
+
+For Workspace accounts that should send without app passwords, use the [Gmail provider](/providers/gmail).
+
+## Bulk import from CSV
+
+To connect many mailboxes at once, choose **Import from CSV** in the SMTP tab and upload your list.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Connection test failed">
+    Confirm SMTP is enabled for the mailbox, and that the host, port and encryption match your provider. If 2FA is on, use an app password.
+  </Accordion>
+  <Accordion title="IMAP failed but SMTP works">
+    IMAP is only for receiving. Enable IMAP on the mailbox, or leave it unconfigured if you only send.
+  </Accordion>
+  <Accordion title="Sender rejected">
+    `fromEmail` must match the connected mailbox or an address your provider lets it send as.
+  </Accordion>
+</AccordionGroup>

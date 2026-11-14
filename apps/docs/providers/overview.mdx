@@ -1,0 +1,54 @@
+---
+title: "Email providers: SendGrid, Gmail and SMTP"
+sidebarTitle: "Overview"
+description: "Connect your own email provider to EmailUX: SendGrid domains, Gmail (Google Workspace) or any SMTP and IMAP mailbox. Then send with the API."
+icon: "plug"
+keywords: ["bring your own ESP", "SendGrid", "Gmail API", "SMTP", "IMAP", "email service provider"]
+---
+
+EmailUX renders your templates and hands them to **your** provider. You connect the provider once, create an API key, and call the API.
+
+Manage everything in the dashboard under **Emails, Providers and API Keys**.
+
+## Choose a provider
+
+| Provider | Best for | Render API | How you connect |
+| --- | --- | --- | --- |
+| [**SendGrid**](/providers/sendgrid) | Production sending from your own domain. | Yes | **Add domain (SendGrid)**, then save your SendGrid API key. |
+| [**Gmail (Google Workspace)**](/providers/gmail) | Sending from a Workspace mailbox. | Deliver only | **Add provider, Gmail**, then trust the EmailUX client ID in Google Admin. |
+| [**SMTP and IMAP**](/providers/smtp-imap) | Any mailbox or SMTP service, including Fastmail, Zoho, Mailgun and Amazon SES. | Deliver only | **Add provider, SMTP**, then enter host, port and credentials. |
+
+<Info>
+  `render()` needs a SendGrid domain. Gmail and SMTP work with `deliver()`. See the [API client](/api/api-client#which-provider-supports-what).
+</Info>
+
+## Set-up flow
+
+<Steps>
+  <Step title="Add the provider">
+    Use **Add domain (SendGrid)** or **Add provider** on the Providers page.
+  </Step>
+  <Step title="Create an API key">
+    Generate a key in the domain or provider card. See [API keys](/providers/api-keys).
+  </Step>
+  <Step title="Send">
+    Call `deliver()` from [`@emailux/api-client`](/api/api-client).
+  </Step>
+</Steps>
+
+## Provider guides
+
+<CardGroup cols={2}>
+  <Card title="SendGrid" icon="send" href="/providers/sendgrid">
+    Add a domain and save your SendGrid key.
+  </Card>
+  <Card title="Gmail" icon="mail" href="/providers/gmail">
+    Connect a Google Workspace account.
+  </Card>
+  <Card title="SMTP and IMAP" icon="server" href="/providers/smtp-imap">
+    Connect any mailbox, with presets for popular providers.
+  </Card>
+  <Card title="API keys" icon="key" href="/providers/api-keys">
+    Create, copy and revoke keys.
+  </Card>
+</CardGroup>

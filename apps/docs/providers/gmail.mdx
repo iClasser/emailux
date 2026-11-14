@@ -1,0 +1,72 @@
+---
+title: "Send email through Gmail and Google Workspace"
+sidebarTitle: "Gmail"
+description: "Connect a Google Workspace account to EmailUX by trusting the app client ID, then deliver templates through Gmail with the API."
+icon: "mail"
+keywords: ["send email Gmail API", "Google Workspace email sending", "trust third party app Google Admin"]
+---
+
+Connect a Google Workspace account to send EmailUX templates from that mailbox. Gmail supports **`deliver()`**.
+
+<Note>
+  A Google Workspace admin must trust the EmailUX app once. Personal `@gmail.com` accounts cannot use the admin steps below.
+</Note>
+
+<Steps>
+  <Step title="Start the connection">
+    Open **Emails, Providers and API Keys**, choose **Add provider**, and select the **Gmail** tab. The dialog is titled **Connect GSuite Workspace**.
+  </Step>
+  <Step title="Copy the client ID">
+    Copy the **Client ID** shown in the dialog.
+  </Step>
+  <Step title="Trust the app in Google Admin">
+    In the [Google Workspace Admin console](https://admin.google.com/ac/owl/list?tab=configuredApps), go to **Show more, Security, Access and data control, API controls, Manage third-party app access**. Choose **Configure new app**, search for the client ID, and set it to **Trusted**.
+  </Step>
+  <Step title="Set a sender name">
+    Optionally enter a **Default sender name**, such as `Your product`.
+  </Step>
+  <Step title="Connect the account">
+    Select **Connect Account** and approve access with the Google account you want to send from.
+  </Step>
+  <Step title="Create an API key">
+    Generate a key in the provider card. See [API keys](/providers/api-keys).
+  </Step>
+  <Step title="Deliver">
+    ```ts
+    import { EmailUxApiClient } from '@emailux/api-client';
+
+    const client = new EmailUxApiClient({
+      apiKey: process.env.EMAILUX_API_KEY!,
+      provider: 'gmail',
+    });
+
+    await client.deliver({
+      experienceId: 'welcome_email',
+      channelData: {
+        toEmail: 'alex@example.com',
+        fromEmail: 'your-connected-sender@yourdomain.com',
+        fromEmailName: 'Your product',
+      },
+      data: { nameTo: 'Alex' },
+    });
+    ```
+  </Step>
+</Steps>
+
+`fromEmail` must match the connected Google account.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The client ID shows as not configured">
+    The server could not load the client ID. Contact support, then retry.
+  </Accordion>
+  <Accordion title="Google blocks the connection">
+    The app is not trusted yet. Complete the Admin console step above and wait a few minutes.
+  </Accordion>
+  <Accordion title="Sending limits">
+    Gmail enforces its own daily sending limits per account. For high volume, use [SendGrid](/providers/sendgrid).
+  </Accordion>
+</AccordionGroup>
+
+Looking for signatures rather than sending? See [Connect Google Workspace for signatures](/signatures/connect-google-workspace).
