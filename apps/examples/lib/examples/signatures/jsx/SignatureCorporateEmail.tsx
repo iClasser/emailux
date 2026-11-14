@@ -50,7 +50,7 @@ const SignatureCorporateEmail = () => (
       <Table padding="0px">
         <Row>
           <Col width="4px" backgroundColor="#00AAAB"><Text plain>&nbsp;</Text></Col>
-          <Col valign="top">
+          <Col valign="top" style={{ padding: "0px 16px" }}>
             <Text spacing="0px" fontWeight="700" fontSize="16px" color="#0f172a">Alex Morgan</Text>
             <Text spacing="0px" fontSize="13px" color="#64748b">Head of Partnerships · Acme Corp</Text>
             <Text spacing="0px" fontSize="13px" color="#334155">T +1 415 555 0142 · <A href="mailto:alex@acme.example">alex@acme.example</A></Text>
