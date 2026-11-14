@@ -30,6 +30,8 @@ keywords: ["email API", "transactional email API", "send email from template", "
       data: { firstName: 'Ada' },
     });
     ```
+
+    Enable the template for that SendGrid domain with **Set SendGrid domain** or **Manage templates**; a template with no live version is not available until one is marked live.
   </Step>
   <Step title="Or deliver it">
     `deliver()` renders and queues the send through your connected provider. See the [API client reference](/api/api-client) for provider options and response codes.
