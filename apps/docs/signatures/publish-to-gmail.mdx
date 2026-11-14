@@ -1,0 +1,50 @@
+---
+title: "Publish email signatures to Gmail"
+sidebarTitle: "Publish to Gmail"
+description: "Sync rendered signatures to every Gmail mailbox, understand the per-mailbox queue, and fix failed syncs."
+icon: "send"
+keywords: ["publish Gmail signature", "update Gmail signatures for all users", "Gmail settings API signature"]
+---
+
+Publishing renders one signature per person and writes it to that person's Gmail settings.
+
+<Steps>
+  <Step title="Check the prerequisites">
+    You need a signature, a connected Google Workspace directory, and at least one rule that assigns the signature.
+  </Step>
+  <Step title="Sync">
+    On **Signatures, Directory**, choose **Sync now**. EmailUX refreshes the directory, applies your rules and queues each mailbox that changed.
+  </Step>
+  <Step title="Verify in Gmail">
+    Open a test user's Gmail, choose **Settings, See all settings, General, Signature**, or compose a new message and confirm the signature appears.
+  </Step>
+</Steps>
+
+## How the queue works
+
+- Each mailbox has its own queue entry with a **pending** or **failed** state once it has been written.
+- If a signature has not changed, the mailbox is **skipped**.
+- A mailbox that fails is marked **failed** and the error is attached. EmailUX retries it later.
+- Only active users with a ready mailbox are published.
+
+## When people change
+
+Update the directory, then sync. A new title, department or phone number flows into the next render. Moving a person out of a rule or adding them to an **Ignore** rule stops the publishing for that person.
+
+<Warning>
+  EmailUX writes the signature to Gmail's signature setting. Gmail decides where it is applied, so mail sent from other clients may not include it. Test the clients your people use.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="A mailbox shows failed">
+    Read the attached error. The most common causes are a missing delegation scope, a suspended user or a deleted mailbox. Fix it, then sync again.
+  </Accordion>
+  <Accordion title="Nothing is published">
+    Confirm that a rule assigns a signature and that the connection is active. People matching no rule receive nothing.
+  </Accordion>
+  <Accordion title="Fields appear empty">
+    Check the person's directory entry and the [field order](/signatures/data-sources). Add a fallback or custom field if the directory lacks the value.
+  </Accordion>
+</AccordionGroup>

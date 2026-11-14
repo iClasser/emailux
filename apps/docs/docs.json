@@ -1,14 +1,18 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "React Email",
+  "name": "EmailUX Docs",
   "colors": {
     "primary": "#00AAAB",
     "light": "#E5F3F4",
     "dark": "#12474C"
   },
   "contextual": {
-    "options": ["copy", "chatgpt", "claude"]
+    "options": [
+      "copy",
+      "chatgpt",
+      "claude"
+    ]
   },
   "favicon": "/logo/favicon.png",
   "navigation": {
@@ -19,19 +23,50 @@
         "groups": [
           {
             "group": "Overview",
-            "pages": ["introduction"]
+            "pages": [
+              "introduction"
+            ]
           },
           {
             "group": "Getting Started",
-            "pages": ["getting-started/setup"]
+            "pages": [
+              "getting-started/setup"
+            ]
+          },
+          {
+            "group": "Email Signatures",
+            "pages": [
+              "signatures/overview",
+              "signatures/create-organization",
+              "signatures/design-a-signature",
+              "signatures/connect-google-workspace",
+              "signatures/data-sources",
+              "signatures/assignment-rules",
+              "signatures/publish-to-gmail"
+            ]
+          },
+          {
+            "group": "Email Studio",
+            "pages": [
+              "email-studio/overview",
+              "email-studio/design-your-first-email",
+              "email-studio/localize-an-email",
+              "email-studio/send-with-the-api",
+              "guides/send-your-first-email"
+            ]
           },
           {
             "group": "API",
-            "pages": ["api/api-client"]
+            "pages": [
+              "api/api-client"
+            ]
           },
           {
             "group": "Add-Ins",
-            "pages": ["addins/outlook-html-import", "addins/gmail-html-inserter"]
+            "pages": [
+              "addins/outlook-html-import",
+              "addins/gmail-html-inserter"
+            ]
           },
           {
             "group": "Components",
@@ -81,7 +116,6 @@
     "strict": true
   },
   "background": {
-    "image": "/images/background.png",
     "color": {
       "dark": "#111111"
     }
@@ -90,6 +124,29 @@
     "primary": {
       "type": "github",
       "href": "https://github.com/iClasser/emailux"
+    },
+    "links": [
+      {
+        "label": "EmailUX",
+        "href": "https://www.emailux.com"
+      }
+    ]
+  },
+  "description": "Documentation for EmailUX: email signatures for Google Workspace, Email Studio, the email API client, React email components, and Gmail and Outlook HTML add-ins.",
+  "seo": {
+    "indexing": "navigable",
+    "metatags": {
+      "og:site_name": "EmailUX Docs",
+      "og:type": "website",
+      "twitter:card": "summary",
+      "robots": "index, follow"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/iClasser/emailux",
+      "x": "https://x.com/hmdroh",
+      "website": "https://www.emailux.com"
     }
   }
 }

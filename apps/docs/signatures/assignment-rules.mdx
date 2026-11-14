@@ -1,0 +1,55 @@
+---
+title: "Assign signatures to teams with rules"
+sidebarTitle: "Assignment rules"
+description: "Create rules that give each team or department the right email signature, matching on directory fields or Google groups. The first matching rule wins."
+icon: "list-filter"
+keywords: ["email signature rules", "signature by department", "different signatures per team"]
+---
+
+A rule decides which signature a person gets, or whether they get one at all.
+
+## How rules are evaluated
+
+- Rules run in **priority order**, lowest number first.
+- The **first matching rule** decides the outcome.
+- A rule with **no conditions** matches everyone, so use it last as the default.
+- All conditions in one rule must match.
+
+## Actions
+
+| Action | Result |
+| --- | --- |
+| **Use signature** | Publishes the chosen signature to matching people. |
+| **Ignore** | Skips matching people. Use it for shared accounts, contractors or executives with a custom signature. |
+
+## Conditions
+
+| Type | Example |
+| --- | --- |
+| **Group** | The person is in the *Sales* group. |
+| **Field equals** | `person.department` equals `Engineering`. |
+| **Field contains** | `person.title` contains `Director`. |
+| **Field is empty** | `person.mobile` is empty. |
+
+Matching is not case-sensitive.
+
+<Steps>
+  <Step title="Open Rules">
+    Go to **Signatures, Directory, Rules**.
+  </Step>
+  <Step title="Add a rule">
+    Name it, set a priority, choose **Use signature** or **Ignore**, and pick the signature.
+  </Step>
+  <Step title="Add conditions">
+    Match on a group or a field. Leave conditions empty for a default rule.
+  </Step>
+  <Step title="Order and save">
+    Put specific rules first, for example Sales at priority 10 and *Everyone* at priority 100.
+  </Step>
+</Steps>
+
+<Tip>
+  A signature that appears in a rule or is assigned to a mailbox is marked as assigned in the signature list.
+</Tip>
+
+Next: [publish to Gmail](/signatures/publish-to-gmail).

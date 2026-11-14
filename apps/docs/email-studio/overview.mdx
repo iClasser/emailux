@@ -1,0 +1,49 @@
+---
+title: "Email Studio: design branded emails without code"
+sidebarTitle: "Overview"
+description: "Email Studio is EmailUX's visual email editor with a block library, localization and AI. Design once, then render or send through your own provider."
+icon: "layout-template"
+keywords: ["email editor", "email template builder", "visual email designer", "responsive email templates", "email localization"]
+---
+
+**Email Studio** is a visual editor for marketing and transactional emails. You design in blocks, EmailUX generates email-safe HTML, and your own provider sends it.
+
+## What it does
+
+- **Visual editor.** Drag blocks onto a canvas. A code preview shows exactly what will be sent.
+- **Block library.** Save blocks such as headers and footers once and reuse them across templates.
+- **Localization.** One layout with a separate set of strings per language. Arabic and Hebrew switch the template to right-to-left.
+- **Template versions.** Every version is a draft, approved or live, and you can send yourself a sample first.
+- **HTML out.** Download the HTML, export the template as JSON, or render it from your code through the API.
+- **Your sender.** EmailUX renders the template and hands it to SendGrid, Google Workspace or SMTP. Your domain and reputation stay yours.
+
+## Guides
+
+<CardGroup cols={2}>
+  <Card title="Design your first email" icon="pen-tool" href="/email-studio/design-your-first-email">
+    Build a template from blocks.
+  </Card>
+  <Card title="Add languages" icon="languages" href="/email-studio/localize-an-email">
+    Translate strings and right-to-left support.
+  </Card>
+  <Card title="Send through the API" icon="code" href="/email-studio/send-with-the-api">
+    Render and deliver from your code.
+  </Card>
+  <Card title="Send your first email" icon="rocket" href="/guides/send-your-first-email">
+    From template to inbox, end to end.
+  </Card>
+</CardGroup>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Do I need to know HTML?">
+    No. You build visually and Email Studio generates the HTML. Developers can use the open-source [@emailux/components](/getting-started/setup) package for the same building blocks.
+  </Accordion>
+  <Accordion title="Does EmailUX send the email?">
+    No. EmailUX renders the template and hands it to the provider you connected. Your sender, domain and reputation stay yours.
+  </Accordion>
+  <Accordion title="What happens when I edit a library block?">
+    A library block inside a template is read-only there, so nobody changes it by accident. Edit the original in the library to change it everywhere.
+  </Accordion>
+</AccordionGroup>

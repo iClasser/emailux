@@ -1,0 +1,27 @@
+---
+title: "Send your first email with EmailUX"
+sidebarTitle: "Send your first email"
+description: "End-to-end tutorial: design a template, connect a sending provider, and send it from your code with the EmailUX API."
+icon: "rocket"
+keywords: ["send transactional email", "email API tutorial", "bring your own ESP"]
+---
+
+This path takes you from an empty account to an email in an inbox.
+
+<Steps>
+  <Step title="Design the template">
+    Follow [Design your first email](/email-studio/design-your-first-email). Name it `welcome-email`.
+  </Step>
+  <Step title="Connect your provider">
+    EmailUX is not the sender of record. Connect SendGrid, Google Workspace or SMTP so your own domain and reputation are used.
+  </Step>
+  <Step title="Authenticate your domain">
+    Set up SPF, DKIM and DMARC with your provider before sending at volume. See the [email authentication guide](https://www.emailux.com/guides/email-authentication).
+  </Step>
+  <Step title="Send from code">
+    Use `deliver()` from [@emailux/api-client](/api/api-client) with `channel_data` for the sender and recipient.
+  </Step>
+  <Step title="Check the result">
+    Confirm a `200` response and the message in the recipient inbox.
+  </Step>
+</Steps>

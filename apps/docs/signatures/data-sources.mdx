@@ -1,0 +1,40 @@
+---
+title: "Signature data sources: Google Workspace and Workday"
+sidebarTitle: "Data sources"
+description: "Fill email signatures from Google Workspace or Workday. Map fields and choose which source wins when two sources disagree."
+icon: "database"
+keywords: ["Workday email signature", "HRIS signature integration", "directory sync signature"]
+---
+
+A **data source** fills the employee profile that signatures read from. The inbox connection, Google Workspace, is what writes the signature.
+
+Open **Signatures, Data sources** to see each source and its status.
+
+## Google Workspace
+
+Connect it from the directory page. See [Connect Google Workspace](/signatures/connect-google-workspace).
+
+## Workday
+
+<Steps>
+  <Step title="Open Workday">
+    On **Data sources**, choose **Connect** next to Workday.
+  </Step>
+  <Step title="Enter connection details">
+    Provide the **Host**, **Tenant**, **Collection**, **Report URL**, **Client ID**, **Client secret** and **Refresh token** from your Workday integration.
+  </Step>
+  <Step title="Map fields">
+    Match Workday columns to EmailUX profile fields such as title, department and manager.
+  </Step>
+  <Step title="Sync">
+    Run a sync and confirm that people show the expected values.
+  </Step>
+</Steps>
+
+## Choose which source wins
+
+When Google Workspace and Workday both provide a value, set the field order. For example, take **Job title** from Workday first and fall back to Google. The first source with a value wins, and you set the order for each field.
+
+## Custom profile fields
+
+Add fields your directories lack under **Settings**. Merge fields in the editor can use them like the built-in ones.

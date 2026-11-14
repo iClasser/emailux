@@ -1,0 +1,74 @@
+---
+title: "Email signature management for Google Workspace"
+sidebarTitle: "Overview"
+description: "How EmailUX Signatures designs one email signature, fills it from your Google Workspace or Workday directory, and publishes it to every Gmail mailbox."
+icon: "signature"
+keywords: ["email signature", "Google Workspace email signature", "Gmail signature manager", "centralized email signatures", "email signature generator"]
+---
+
+**EmailUX Signatures** lets one person design a company email signature and publish it to every Gmail mailbox in a Google Workspace domain. Each person's name, title, phone and address come from your directory, so nobody edits a signature by hand.
+
+## How it works
+
+1. **Design** one signature in the same drag-and-drop editor used for emails, with merge fields where a name or phone number belongs.
+2. **Connect** your Google Workspace directory, and optionally Workday, so EmailUX knows each person's details.
+3. **Assign** signatures with rules, for example one design for Sales and another for everyone else.
+4. **Publish.** EmailUX writes each person's rendered signature to their Gmail mailbox through the Gmail settings API.
+
+EmailUX does not send or route your mail. Signatures are written into Gmail, and Gmail adds them to messages as usual.
+
+## What you get
+
+| Capability | Details |
+| --- | --- |
+| Visual editor | Twelve layouts, logo, banners and links, with a code preview. |
+| Person fields | Sixteen built-in fields: name, first and last name, email, job title, department, employee ID, manager, location, phone, mobile and a full address. |
+| Custom fields | Add your own for pronouns, certifications or a booking link. |
+| Shared assets | Upload the logo and banners once. Every signature uses the same files. |
+| Directory sources | Google Workspace and Workday, with a field order you control. |
+| Assignment rules | Match on directory fields or groups. The first matching rule wins. |
+| Queued sync | Changes go into a queue per mailbox. Unchanged signatures are skipped and failures show an error. |
+| Team roles | Admin, Editor and Finance roles for the organization. |
+
+## Step-by-step guides
+
+<CardGroup cols={2}>
+  <Card title="1. Create an organization" icon="building" href="/signatures/create-organization">
+    Set up your workspace and invite teammates.
+  </Card>
+  <Card title="2. Design a signature" icon="pen-tool" href="/signatures/design-a-signature">
+    Build the layout and add merge fields.
+  </Card>
+  <Card title="3. Connect Google Workspace" icon="plug" href="/signatures/connect-google-workspace">
+    Authorize the directory and Gmail access.
+  </Card>
+  <Card title="4. Add data sources" icon="database" href="/signatures/data-sources">
+    Map fields and set which source wins.
+  </Card>
+  <Card title="5. Assign with rules" icon="list-filter" href="/signatures/assignment-rules">
+    Give each team the right signature.
+  </Card>
+  <Card title="6. Publish to Gmail" icon="send" href="/signatures/publish-to-gmail">
+    Sync signatures and fix failures.
+  </Card>
+</CardGroup>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Where are signatures published?">
+    To Gmail and Google Workspace. EmailUX writes each person's rendered signature to their mailbox through the Gmail settings API.
+  </Accordion>
+  <Accordion title="Where does the employee data come from?">
+    From your Google Workspace directory or Workday, mapped to the fields your signature uses. You choose which source wins when they overlap.
+  </Accordion>
+  <Accordion title="Will the signature look the same in every email client?">
+    The signature is generated as table-based HTML with inline styles, which mail clients handle most consistently. Test with the clients your recipients use before rolling it out.
+  </Accordion>
+  <Accordion title="Can different teams have different signatures?">
+    Yes. Assignment rules match on directory fields or groups, and the first matching rule decides which signature a person gets.
+  </Accordion>
+  <Accordion title="What happens when someone leaves or changes role?">
+    Update the directory and the next sync applies the new title or removes the person from a rule. You can also exclude people from publishing.
+  </Accordion>
+</AccordionGroup>

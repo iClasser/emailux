@@ -1,0 +1,27 @@
+---
+title: "Translate an email into multiple languages"
+sidebarTitle: "Localize an email"
+description: "Add languages to an EmailUX template, translate strings in place, and support right-to-left languages like Arabic and Hebrew."
+icon: "languages"
+keywords: ["multilingual email template", "email localization", "right to left email", "translate email template"]
+---
+
+Each template has **one layout** and a **separate set of strings per language**, so you never maintain copies of the design.
+
+<Steps>
+  <Step title="Open the language menu">
+    In the editor, open the language selector for your template.
+  </Step>
+  <Step title="Add a language">
+    Choose a language. EmailUX copies strings from a language you pick so you can translate them in place.
+  </Step>
+  <Step title="Translate the strings">
+    Edit the text for the new language. Use the AI assist if you want a first draft, then review it.
+  </Step>
+  <Step title="Preview each language">
+    Switch languages in the preview. Arabic and Hebrew switch the template to **right-to-left** automatically.
+  </Step>
+  <Step title="Send with a locale">
+    Pass a `locale` such as `fr-FR` when you render or deliver through the [API](/email-studio/send-with-the-api).
+  </Step>
+</Steps>

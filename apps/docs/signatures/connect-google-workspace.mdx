@@ -1,0 +1,65 @@
+---
+title: "Connect Google Workspace to EmailUX Signatures"
+sidebarTitle: "Connect Google Workspace"
+description: "Authorize EmailUX to read your Google Workspace directory and write Gmail signatures using domain-wide delegation. Lists the exact scopes to paste."
+icon: "plug"
+keywords: ["Google Workspace email signature", "domain-wide delegation", "Gmail signature API", "bulk Gmail signatures"]
+---
+
+EmailUX reads people from your Google Workspace directory and writes signatures to Gmail. Setup takes a **Google Workspace Super Admin** and uses domain-wide delegation, so employees never click through a consent screen.
+
+<Note>
+  Individuals can also connect their own Google account to publish to their own mailbox. Use the domain-wide setup to cover the whole domain.
+</Note>
+
+<Steps>
+  <Step title="Open the connection">
+    In EmailUX, open **Signatures, Directory** and go to the **Connection** section. It walks through three stages: **Connect**, **Authorize** and **Sync**.
+  </Step>
+  <Step title="Connect">
+    Start the connection with the Google account of a Super Admin. EmailUX uses it to identify your Workspace customer and domains.
+  </Step>
+  <Step title="Authorize domain-wide delegation">
+    In the Google Admin console, open [Domain-wide delegation](https://admin.google.com/ac/owl/domainwidedelegation) and add the client ID EmailUX shows you with the scopes below.
+  </Step>
+  <Step title="Sync the directory">
+    Return to EmailUX and choose **Sync now**. People, groups and organizational units appear under **People** and **Groups**.
+  </Step>
+</Steps>
+
+## Scopes to authorize
+
+Paste these when Google asks for OAuth scopes. They are read-only for the directory, plus Gmail settings for signatures. There is no Drive scope.
+
+```text
+https://www.googleapis.com/auth/admin.directory.user.readonly
+https://www.googleapis.com/auth/admin.directory.userschema.readonly
+https://www.googleapis.com/auth/admin.directory.group.readonly
+https://www.googleapis.com/auth/admin.directory.group.member.readonly
+https://www.googleapis.com/auth/admin.directory.orgunit.readonly
+https://www.googleapis.com/auth/admin.directory.domain.readonly
+https://www.googleapis.com/auth/admin.directory.customer.readonly
+https://www.googleapis.com/auth/gmail.settings.basic
+https://www.googleapis.com/auth/gmail.settings.sharing
+```
+
+## After connecting
+
+- **People** lists directory users and their fields.
+- **Groups** lists directory groups you can use in rules.
+- **Fields** shows the profile fields available to your signatures.
+- **Rules** assigns signatures. See [assignment rules](/signatures/assignment-rules).
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Google could not connect">
+    Confirm you are signed in as a Super Admin, that delegation lists every scope above, and then retry. Scope changes can take a few minutes to apply.
+  </Accordion>
+  <Accordion title="The connection was cancelled">
+    You closed the Google consent screen. Start the connection again.
+  </Accordion>
+  <Accordion title="People are missing after sync">
+    Only active users with a ready mailbox receive signatures. Check that the user is active in Google Admin and run **Sync now** again.
+  </Accordion>
+</AccordionGroup>
